@@ -6,7 +6,7 @@ const Headder = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
       <div className="container">
-        <Link className="navbar-brand fw-bold" to="/">Saurabh's Portfolio</Link>
+        <Link className="navbar-brand fw-bold" to="/">DEV-STREET</Link>
         <button
           className="navbar-toggler"
           type="button"
