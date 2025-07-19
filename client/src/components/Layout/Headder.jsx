@@ -19,19 +19,19 @@ const Headder = () => {
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav text-center">
             <li className="nav-item">
-              <Link className="nav-link active" to="/">Home</Link>
+              <NavLink className="nav-link" to="/">Home</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
+              <NavLink className="nav-link" to="/about">About</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/projects">Projects</Link>
+              <NavLink className="nav-link" to="/projects">Projects</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/skills">Skills</Link>
+              <NavLink className="nav-link" to="/skills">Skills</NavLink>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">Contact</Link>
+              <NavLink className="nav-link" to="/contact">Contact</NavLink>
             </li>
           </ul>
         </div>
