@@ -9,7 +9,7 @@ const Footer = () => {
 
           {/* About Section */}
           <div className="col-md-4 mb-3">
-            <h5>Saurabh's Portfolio</h5>
+            <h5>DEV-STREET</h5>
             <p className=" ">
               A full-stack developer passionate about building clean & user-friendly web apps.
             </p>
