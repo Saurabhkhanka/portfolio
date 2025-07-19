@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="col-md-4 mb-3">
             <h5>DEV-STREET</h5>
             <p className=" ">
-              “The intersection of creativity & code.”
+              The intersection of creativity & code.
             </p>
           </div>
 
