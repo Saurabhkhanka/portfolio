@@ -38,9 +38,9 @@ const About = () => {
           <div className="mt-5">
             <h3 className="mb-3">My Background</h3>
             <ul>
-              <li><strong>Education:</strong> MCA in AI & ML from XYZ University</li>
-              <li><strong>Specialization:</strong> Full Stack Development, Machine Learning</li>
-              <li><strong>Tools:</strong> Git, GitHub, VS Code, Postman, Firebase</li>
+              <li><strong>Education:</strong> MCA in AI & ML from Amity University</li>
+              <li><strong>Specialization:</strong> Full Stack Development, Backend Development, Frontend Development</li>
+              <li><strong>Tools:</strong> Git, GitHub, VS Code, Postman</li>
             </ul>
           </div>
         </div>
