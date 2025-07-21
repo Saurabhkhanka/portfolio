@@ -13,6 +13,12 @@ const Projects = () => {
       liveLink: 'https://weather-forecast-srsb.onrender.com',
       githubLink: 'https://github.com/Saurabhkhanka/weather'
     },
+      {
+      title: 'Gym Landing Page',
+      description: 'Static gym landing page created using basic HTML and CSS.',
+      liveLink: 'https://saurabhkhanka.github.io/Fitness-/',
+      githubLink: 'https://github.com/Saurabhkhanka/Fitness-'
+    },
     // Add more projects as needed
   ];
 
