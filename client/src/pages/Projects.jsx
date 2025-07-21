@@ -8,10 +8,10 @@ const Projects = () => {
 
     const projects = [
     {
-      title: 'Personal Finance Tracker',
-      description: 'Track your income and expenses with intuitive graphs.',
-      liveLink: 'https://yourproject1.com',
-      githubLink: 'https://github.com/yourusername/project1'
+      title: 'Weather Forecast',
+      description: 'Weather app showing real-time forecast with dynamic visuals.',
+      liveLink: 'https://weather-forecast-srsb.onrender.com',
+      githubLink: 'https://github.com/Saurabhkhanka/weather'
     },
     {
       title: 'Movie Recommendation System',
