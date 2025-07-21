@@ -4,7 +4,7 @@ import { Link , NavLink} from 'react-router-dom'
 const Headder = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">DEV-STREET</Link>
         <button
