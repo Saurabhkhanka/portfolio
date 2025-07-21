@@ -17,7 +17,6 @@ const Skills = () => {
               <span className="badge bg-primary fs-6"><i class="ri-javascript-line"></i> JavaScript</span>
               <span className="badge bg-primary fs-6"> <i class="ri-reactjs-line"></i> React.js</span>
               <span className="badge bg-primary fs-6"><i class="ri-bootstrap-line"></i> Bootstrap</span>
-              <span className="badge bg-primary fs-6"><i class="ri-tailwind-css-line"></i> Tailwind CSS</span>
             </div>
           </div>
 
@@ -28,8 +27,6 @@ const Skills = () => {
               <span className="badge bg-success fs-6"><i class="ri-nodejs-line"></i> Node.js</span>
               <span className="badge bg-success fs-6"><i class="ri-expressjs-line"></i> Express.js</span>
               <span className="badge bg-success fs-6"><i class="ri-mongo-db-line"></i> MongoDB</span>
-              <span className="badge bg-success fs-6"><i class="ri-sql-line"></i> SQL</span>
-              <span className="badge bg-success fs-6"><i class="ri-firebase-line"></i> Firebase</span>
             </div>
           </div>
 
@@ -41,8 +38,7 @@ const Skills = () => {
               <span className="badge bg-secondary fs-6"><i class="ri-github-line"></i> GitHub</span>
               <span className="badge bg-secondary fs-6"><i class="ri-vscode-line"></i> VS Code</span>
               <span className="badge bg-secondary fs-6"><i class="ri-postman-line"></i> Postman</span>
-              <span className="badge bg-secondary fs-6"><i class="ri-netlify-line"></i> Netlify</span>
-              <span className="badge bg-secondary fs-6"><i class="ri-vercel-line"></i> Vercel</span>
+              <span className="badge bg-secondary fs-6"><i class="ri-netlify-line"></i> Render</span>
             </div>
           </div>
         </div>
