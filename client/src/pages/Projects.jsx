@@ -13,18 +13,6 @@ const Projects = () => {
       liveLink: 'https://weather-forecast-srsb.onrender.com',
       githubLink: 'https://github.com/Saurabhkhanka/weather'
     },
-    {
-      title: 'Movie Recommendation System',
-      description: 'AI-based system to recommend movies based on your taste.',
-      liveLink: '',
-      githubLink: 'https://github.com/yourusername/movie-recommender'
-    },
-    {
-      title: 'E-Commerce Website',
-      description: 'A full-featured shopping site using MERN Stack.',
-      liveLink: 'https://yourproject2.com',
-      githubLink: 'https://github.com/yourusername/project2'
-    },
     // Add more projects as needed
   ];
 
