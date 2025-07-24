@@ -7,7 +7,7 @@ const Layout = ({children}) => {
   return (
     <>
         <Headder/>
-        <main style={{ minHeight: '80vh', paddingBottom: '80px' }}>
+        <main style={{ minHeight: '80vh', paddingBottom: '80px' , marginTop:"10vh"}}>
           <ToastContainer/>
             {children}
         </main>
