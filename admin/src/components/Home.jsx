@@ -6,7 +6,7 @@ const Home = () => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        // Replace with your actual API endpoint
+        
         axios.get(`${import.meta.env.VITE_API_URL}/api/v1/auth/clintInfo`)
             .then(res => setMessages(res.data.messages))
             // .then(res => console.log(res.data.messages))
