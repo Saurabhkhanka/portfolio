@@ -5,7 +5,7 @@ import { requireSignIn, isAdmin } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.post('/client', clientController)
+router.post('/client', requireSignIn, clientController)
 router.get('/clintInfo', requireSignIn, isAdmin, clientInfoController)
 
 export default router

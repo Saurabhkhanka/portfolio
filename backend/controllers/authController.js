@@ -198,6 +198,7 @@ export const verifyRegisterController = async (req, res) => {
         // Log login activity
         try {
             await new activityLogModel({
+                userId: user._id,
                 email: user.email,
                 action: "login",
                 ip: req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown",
@@ -211,6 +212,8 @@ export const verifyRegisterController = async (req, res) => {
             success: true,
             message: "Account verified and logged in successfully",
             user: {
+                _id: user._id,
+                name: user.name,
                 email: user.email,
                 role: user.role
             },
@@ -278,6 +281,7 @@ export const loginController = async (req, res) => {
         // Log login activity
         try {
             await new activityLogModel({
+                userId: user._id,
                 email: user.email,
                 action: "login",
                 ip: req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown",
@@ -291,6 +295,8 @@ export const loginController = async (req, res) => {
             success: true,
             message: "Login successful",
             user: {
+                _id: user._id,
+                name: user.name,
                 email: user.email,
                 role: user.role
             },
@@ -313,6 +319,7 @@ export const logoutController = async (req, res) => {
                 const user = await userModel.findById(req.user.userId);
                 if (user) {
                     await new activityLogModel({
+                        userId: user._id,
                         email: user.email,
                         action: "logout",
                         ip: req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown",
@@ -357,6 +364,8 @@ export const getMeController = async (req, res) => {
         return res.status(200).json({
             success: true,
             user: {
+                _id: user._id,
+                name: user.name,
                 email: user.email,
                 role: user.role
             }
