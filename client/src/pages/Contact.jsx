@@ -36,44 +36,140 @@ const Contact = () => {
 
   return (
     <Layout>
-        <section className="py-5 bg-light">
+      <section className="contact-section py-5 min-vh-80 d-flex align-items-center">
         <div className="container">
-          <h2 className="text-center mb-4">Contact Me</h2>
-          <p className="text-center mb-5">
-            Have a project in mind or just want to say hi? Fill out the form below or email me directly.
-          </p>
+          <div className="text-center mb-5 animate-fade-in">
+            <h1 className="display-4 fw-bold mb-2 text-gradient">Get In Touch</h1>
+            <p className="text-muted fs-5 max-w-2xl mx-auto">
+              Have a project in mind or want to collaborate? Drop a message, and let's create something extraordinary.
+            </p>
+          </div>
 
-          <div className="row justify-content-center">
-            <div className="col-md-8">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Your Name</label>
-                  <input type="text" className="form-control" id="name" placeholder="Enter your name" value={name} onChange={(e)=>setName(e.target.value)} required />
+          <div className="row g-5 align-items-stretch">
+            {/* Info Panel */}
+            <div className="col-lg-5 d-flex flex-column justify-content-between g-4">
+              <div className="d-grid gap-4">
+                <div className="info-item-card">
+                  <div className="info-icon-wrapper">
+                    <i className="ri-mail-line"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold text-dark mb-1">Email Me Directly</h5>
+                    <a href="mailto:saurabhkhanka222@gmail.com" className="text-primary text-decoration-none fs-6">
+                      saurabhkhanka222@gmail.com
+                    </a>
+                  </div>
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Your Email</label>
-                  <input type="email" className="form-control" id="email" placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
+                <div className="info-item-card">
+                  <div className="info-icon-wrapper">
+                    <i className="ri-phone-line"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold text-dark mb-1">Call Me</h5>
+                    <a href="tel:+919582111994" className="text-muted text-decoration-none fs-6">
+                      +91 9582111994
+                    </a>
+                  </div>
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="message" className="form-label">Your Message</label>
-                  <textarea className="form-control" id="message" rows="5" placeholder="Type your message..."  value={message} onChange={(e)=>setMessage(e.target.value)} required></textarea>
-                </div>
-
-                <button type="submit" className="btn btn-primary">Send Message</button>
-              </form>
-
-              {/* Optional direct contact info */}
-              <div className="mt-5 text-center">
-                <p className="mb-1">📧 Email: <a href="mailto:saurabh@example.com">saurabhkhanka222@gmail.com</a></p>
-                <p className="mb-1">📱 Phone: +91 9582111994</p>
-                <div className="mt-3">
-                  <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" className="btn btn-dark btn-sm me-2">GitHub</a>
-                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" className="btn btn-primary btn-sm">LinkedIn</a>
+                <div className="info-item-card">
+                  <div className="info-icon-wrapper">
+                    <i className="ri-map-pin-line"></i>
+                  </div>
+                  <div>
+                    <h5 className="fw-bold text-dark mb-1">Location</h5>
+                    <p className="text-muted mb-0 fs-6">
+                      New Delhi, India
+                    </p>
+                  </div>
                 </div>
               </div>
 
+              {/* Social links */}
+              <div className="mt-5 p-4 glass-card text-center">
+                <h6 className="fw-bold text-muted mb-3 text-uppercase tracking-wider">Connect with me</h6>
+                <div className="d-flex justify-content-center gap-3">
+                  <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" className="social-pill github">
+                    <i className="ri-github-line"></i>
+                  </a>
+                  <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" className="social-pill linkedin">
+                    <i className="ri-linkedin-line"></i>
+                  </a>
+                  <a href="mailto:saurabhkhanka222@gmail.com" className="social-pill email">
+                    <i className="ri-mail-line"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Form Panel */}
+            <div className="col-lg-7">
+              <div className="glass-card p-5">
+                <h3 className="fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+                  <i className="ri-chat-smile-2-line text-primary"></i> Send a Message
+                </h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <label htmlFor="name" className="custom-label">
+                      <i className="ri-user-line text-primary"></i> Your Name
+                    </label>
+                    <input 
+                      type="text" 
+                      className="form-control custom-input" 
+                      id="name" 
+                      placeholder="John Doe" 
+                      value={name} 
+                      onChange={(e)=>setName(e.target.value)} 
+                      required 
+                    />
+                    {user && (
+                      <div className="form-text text-success small mt-1">
+                        <i className="ri-checkbox-circle-line me-1"></i> Prefilled from account
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="email" className="custom-label">
+                      <i className="ri-mail-line text-primary"></i> Email Address
+                    </label>
+                    <input 
+                      type="email" 
+                      className="form-control custom-input" 
+                      id="email" 
+                      placeholder="name@example.com" 
+                      value={email} 
+                      onChange={(e)=>setEmail(e.target.value)} 
+                      required 
+                    />
+                    {user && (
+                      <div className="form-text text-success small mt-1">
+                        <i className="ri-checkbox-circle-line me-1"></i> Prefilled from account
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mb-4">
+                    <label htmlFor="message" className="custom-label">
+                      <i className="ri-message-3-line text-primary"></i> Your Message
+                    </label>
+                    <textarea 
+                      className="form-control custom-input" 
+                      id="message" 
+                      rows="5" 
+                      placeholder="Tell me about your project or inquiry..."  
+                      value={message} 
+                      onChange={(e)=>setMessage(e.target.value)} 
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" className="btn-submit-contact w-100">
+                    <i className="ri-send-plane-fill"></i> Send Message
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
