@@ -2,8 +2,6 @@ import nodemailer from "nodemailer";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import fs from "fs";
-import path from "path";
 import userModel from "../models/userModel.js";
 import activityLogModel from "../models/activityLogModel.js";
 
@@ -406,74 +404,6 @@ export const getUsersController = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Internal server error while fetching users list"
-        });
-    }
-};
-
-export const uploadResumeController = async (req, res) => {
-    try {
-        const { resume } = req.body;
-        if (!resume) {
-            return res.status(400).json({
-                success: false,
-                message: "No resume file data provided."
-            });
-        }
-
-        // Verify it is a valid base64 encoded PDF string
-        if (!resume.startsWith("data:application/pdf;base64,")) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid file format. Please upload a PDF file."
-            });
-        }
-
-        // Extract the base64 data part
-        const base64Data = resume.replace(/^data:application\/pdf;base64,/, "");
-        const buffer = Buffer.from(base64Data, "base64");
-
-        // Ensure the uploads directory exists
-        const dirPath = path.join(process.cwd(), "uploads");
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath, { recursive: true });
-        }
-
-        const filePath = path.join(dirPath, "resume.pdf");
-        fs.writeFileSync(filePath, buffer);
-
-        return res.status(200).json({
-            success: true,
-            message: "Resume uploaded successfully!"
-        });
-    } catch (error) {
-        console.error("Error in uploadResumeController:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error during resume upload"
-        });
-    }
-};
-
-export const downloadResumeController = async (req, res) => {
-    try {
-        const filePath = path.join(process.cwd(), "uploads", "resume.pdf");
-        if (!fs.existsSync(filePath)) {
-            return res.status(404).json({
-                success: false,
-                message: "Resume file not found. Admin needs to upload a resume first."
-            });
-        }
-        
-        res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", 'attachment; filename="Saurabh_Singh_Khanka_Resume.pdf"');
-        
-        const fileStream = fs.createReadStream(filePath);
-        fileStream.pipe(res);
-    } catch (error) {
-        console.error("Error in downloadResumeController:", error);
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error during resume download"
         });
     }
 };

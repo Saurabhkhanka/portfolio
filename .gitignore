@@ -28,6 +28,7 @@ yarn-error.log*
 *.sw?
 
 # OS metadata
+**/.DS_Store
 .DS_Store
 Thumbs.db
 

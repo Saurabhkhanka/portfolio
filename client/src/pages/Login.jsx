@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     
     const { login } = useAuth();
@@ -55,15 +56,26 @@ const Login = () => {
 
                                         <div className="mb-4">
                                             <label htmlFor="passwordInput" className="form-label fw-semibold">Password</label>
-                                            <input
-                                                type="password"
-                                                className="form-control form-control-lg rounded-3"
-                                                id="passwordInput"
-                                                placeholder="••••••••"
-                                                value={password}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                required
-                                            />
+                                            <div className="position-relative">
+                                                <input
+                                                    type={showPassword ? "text" : "password"}
+                                                    className="form-control form-control-lg rounded-3"
+                                                    id="passwordInput"
+                                                    placeholder="••••••••"
+                                                    value={password}
+                                                    onChange={(e) => setPassword(e.target.value)}
+                                                    required
+                                                    style={{ paddingRight: "45px" }}
+                                                />
+                                                <button
+                                                    type="button"
+                                                    className="position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent pe-3 text-muted"
+                                                    onClick={() => setShowPassword(!showPassword)}
+                                                    style={{ zIndex: 10, outline: "none", cursor: "pointer" }}
+                                                >
+                                                    <i className={showPassword ? "ri-eye-off-line" : "ri-eye-line"} style={{ fontSize: "1.2rem" }}></i>
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <button

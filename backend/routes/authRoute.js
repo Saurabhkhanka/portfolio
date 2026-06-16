@@ -6,9 +6,7 @@ import {
     logoutController, 
     getMeController, 
     getActivityLogsController, 
-    getUsersController,
-    uploadResumeController,
-    downloadResumeController
+    getUsersController
 } from "../controllers/authController.js";
 import { requireSignIn, isAdmin } from "../middleware/authMiddleware.js";
 
@@ -21,7 +19,5 @@ router.post("/logout", requireSignIn, logoutController);
 router.get("/me", requireSignIn, getMeController);
 router.get("/activity-logs", requireSignIn, isAdmin, getActivityLogsController);
 router.get("/users", requireSignIn, isAdmin, getUsersController);
-router.post("/resume/upload", requireSignIn, isAdmin, uploadResumeController);
-router.get("/resume/download", downloadResumeController);
 
 export default router;

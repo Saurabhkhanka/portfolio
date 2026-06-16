@@ -38,7 +38,7 @@ const Home = () => {
               <div className="hero-buttons mt-4 d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
                 <Link to="/projects" className="btn-hero-primary text-decoration-none">My Projects</Link>
                 <a 
-                  href={`${import.meta.env.VITE_API_URL}/api/v1/auth/resume/download`} 
+                  href="/resume.pdf" 
                   className="btn-hero-outline text-decoration-none"
                   target="_blank" 
                   rel="noopener noreferrer"
