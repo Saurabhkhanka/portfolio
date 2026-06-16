@@ -7,68 +7,91 @@ const Home = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-dark text-white text-center py-5">
+      <section className="hero-section text-center">
         <div className="container">
-          <h1 className="display-4 fw-bold">Hi, I'm Saurabh</h1>
-          <p className="lead">Full Stack Developer | MERN Stack Enthusiast</p>
-          <div className="mt-4">
-            <Link to="/projects" className="btn btn-primary mx-2">My Projects</Link>
-            <Link to="/contact" className="btn btn-outline-light mx-2">Contact Me</Link>
+          <h1 className="hero-title">Hi, I'm Saurabh</h1>
+          <p className="hero-subtitle">Full Stack Developer | MERN Stack Enthusiast</p>
+          <div className="hero-buttons mt-4">
+            <Link to="/projects" className="btn-hero-primary mx-2 text-decoration-none">My Projects</Link>
+            <Link to="/contact" className="btn-hero-outline mx-2 text-decoration-none">Contact Me</Link>
           </div>
         </div>
       </section>
 
       {/* Quick Overview */}
-      <section className="py-5 bg-light text-center">
+      <section className="welcome-section">
         <div className="container">
-          <h2 className="mb-3">Welcome to My Portfolio</h2>
-          <p className="text-muted">Explore my work, skills, and get in touch.</p>
+          <h2 className="welcome-title">Welcome to My Portfolio</h2>
+          <div className="welcome-line"></div>
+          <p className="text-muted lead mx-auto fs-5" style={{ maxWidth: '650px' }}>
+            Explore my work, technical skill sets, and projects, or get in touch directly to collaborate.
+          </p>
         </div>
       </section>
 
       {/* Navigation Cards */}
-      <section className="py-5">
+      <section className="home-cards-section">
         <div className="container">
-          <div className="row g-4 text-center">
-            <div className="col-md-3 col-sm-6">
-              <Link to="/about" className="text-decoration-none text-dark">
-                <div className="card shadow h-100">
-                  <div className="card-body">
-                    <h5 className="card-title">About Me</h5>
-                    <p className="card-text">Know more about my background.</p>
+          <div className="row g-4 justify-content-center">
+            {/* About Me Card */}
+            <div className="col-lg-3 col-md-6 col-sm-10">
+              <Link to="/about" className="nav-card-link">
+                <div className="nav-card card-about">
+                  <div className="nav-card-icon-wrapper">
+                    <i className="ri-user-3-line"></i>
+                  </div>
+                  <h4 className="nav-card-title">About Me</h4>
+                  <p className="nav-card-text">Know more about my educational background, experience, and interests.</p>
+                  <div className="nav-card-action mt-auto">
+                    Explore Profile <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
               </Link>
             </div>
 
-            <div className="col-md-3 col-sm-6">
-              <Link to="/skills" className="text-decoration-none text-dark">
-                <div className="card shadow h-100">
-                  <div className="card-body">
-                    <h5 className="card-title">Skills</h5>
-                    <p className="card-text">Tech stack and tools I use.</p>
+            {/* Skills Card */}
+            <div className="col-lg-3 col-md-6 col-sm-10">
+              <Link to="/skills" className="nav-card-link">
+                <div className="nav-card card-skills">
+                  <div className="nav-card-icon-wrapper">
+                    <i className="ri-braces-line"></i>
+                  </div>
+                  <h4 className="nav-card-title">My Skills</h4>
+                  <p className="nav-card-text">Explore the full range of technologies, languages, and tools I specialize in.</p>
+                  <div className="nav-card-action mt-auto">
+                    View Skills <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
               </Link>
             </div>
 
-            <div className="col-md-3 col-sm-6">
-              <Link to="/projects" className="text-decoration-none text-dark">
-                <div className="card shadow h-100">
-                  <div className="card-body">
-                    <h5 className="card-title">Projects</h5>
-                    <p className="card-text">Check out my recent work.</p>
+            {/* Projects Card */}
+            <div className="col-lg-3 col-md-6 col-sm-10">
+              <Link to="/projects" className="nav-card-link">
+                <div className="nav-card card-projects">
+                  <div className="nav-card-icon-wrapper">
+                    <i className="ri-folder-open-line"></i>
+                  </div>
+                  <h4 className="nav-card-title">Projects</h4>
+                  <p className="nav-card-text">Browse through my portfolio of responsive web applications and live demos.</p>
+                  <div className="nav-card-action mt-auto">
+                    See My Work <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
               </Link>
             </div>
 
-            <div className="col-md-3 col-sm-6">
-              <Link to="/contact" className="text-decoration-none text-dark">
-                <div className="card shadow h-100">
-                  <div className="card-body">
-                    <h5 className="card-title">Contact</h5>
-                    <p className="card-text">Let's connect and collaborate!</p>
+            {/* Contact Card */}
+            <div className="col-lg-3 col-md-6 col-sm-10">
+              <Link to="/contact" className="nav-card-link">
+                <div className="nav-card card-contact">
+                  <div className="nav-card-icon-wrapper">
+                    <i className="ri-mail-send-line"></i>
+                  </div>
+                  <h4 className="nav-card-title">Contact Me</h4>
+                  <p className="nav-card-text">Get in touch to collaborate on projects, discuss opportunities, or connect.</p>
+                  <div className="nav-card-action mt-auto">
+                    Let's Connect <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
               </Link>
