@@ -79,30 +79,33 @@ const Skills = () => {
             </p>
           </div>
 
-          <div className="row g-4 justify-content-center">
-            {skillCategories.map((category, index) => (
-              <div key={index} className="col-12 col-md-6 col-lg-4">
+          {/* Main 2x2 grid for first 4 categories */}
+          <div className="row g-4 justify-content-center mb-4">
+            {skillCategories.slice(0, 4).map((category, index) => (
+              <div key={index} className="col-12 col-md-6">
                 <div className="skills-category-card" style={{ '--cat-color': category.catColor }}>
                   <h4 className="category-title mb-4">
                     <i className={`${category.catIcon} me-2`} style={{ color: category.catColor }}></i>
                     {category.title}
                   </h4>
-                  <div className="d-flex flex-wrap gap-2">
+                  <div className="skills-grid">
                     {category.skills.map((skill, sIdx) => (
                       <div 
                         key={sIdx} 
-                        className="skill-badge-custom" 
+                        className="skill-tile-custom" 
                         title={skill.name}
                         style={{
                           '--skill-color': skill.color,
                           '--skill-glow': `${skill.color}20`
                         }}
                       >
-                        <i 
-                          className={skill.icon} 
-                          style={{ color: skill.color, fontSize: '1.2rem' }}
-                        ></i>
-                        <span>{skill.name}</span>
+                        <div 
+                          className="skill-tile-icon-wrapper" 
+                          style={{ color: skill.color, background: `${skill.color}15` }}
+                        >
+                          <i className={skill.icon}></i>
+                        </div>
+                        <span className="skill-tile-name">{skill.name}</span>
                       </div>
                     ))}
                   </div>
@@ -110,7 +113,45 @@ const Skills = () => {
               </div>
             ))}
           </div>
-        </div>
+
+          {/* Full-width horizontal flex card for Architecture & Integration */}
+          {skillCategories[4] && (
+            <div className="row g-4 justify-content-center">
+              <div className="col-12">
+                <div className="skills-category-card" style={{ '--cat-color': skillCategories[4].catColor }}>
+                  <h4 className="category-title mb-4">
+                    <i className={`${skillCategories[4].catIcon} me-2`} style={{ color: skillCategories[4].catColor }}></i>
+                    {skillCategories[4].title}
+                  </h4>
+                  
+                  {/* Flex wrap container instead of Grid */}
+                  <div className="d-flex flex-wrap gap-3">
+                    {skillCategories[4].skills.map((skill, sIdx) => (
+                      <div 
+                        key={sIdx} 
+                        className="skill-tile-custom" 
+                        title={skill.name}
+                        style={{
+                          '--skill-color': skill.color,
+                          '--skill-glow': `${skill.color}20`,
+                          width: 'auto',
+                          flex: '0 0 auto'
+                        }}
+                      >
+                        <div 
+                          className="skill-tile-icon-wrapper" 
+                          style={{ color: skill.color, background: `${skill.color}15` }}
+                        >
+                          <i className={skill.icon}></i>
+                        </div>
+                        <span className="skill-tile-name" style={{ overflow: 'visible', whiteSpace: 'normal' }}>{skill.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}        </div>
       </section>
     </Layout>
   )
