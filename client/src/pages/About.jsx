@@ -27,13 +27,16 @@ const About = () => {
                 <div className="welcome-line ms-0 mb-4" style={{ width: '50px' }}></div>
                 
                 <p className="about-paragraph">
-                  Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer passionate about crafting responsive, scalable, and dynamic web applications using modern technologies like React, Node.js, and MongoDB.
+                  Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer passionate about crafting responsive, scalable, and secure web and mobile applications using modern technologies like <strong>React, Next.js, Node.js, Express, MongoDB, and MySQL</strong>.
                 </p>
                 <p className="about-paragraph">
-                  I have a strong foundation in computer science and love solving real-world problems through clean and efficient code. I'm constantly exploring new tools and frameworks to optimize my development workflow and deliver premium user experiences.
+                  I specialize in building modular client-side architectures with <strong>Redux Toolkit & RTK Query</strong>, as well as native mobile apps with <strong>React Native</strong>. On the backend, I design secure relational and document databases, writing optimized endpoints protected by <strong>JWT verification, Bcrypt encryption, Role-Based Access Control (RBAC), and Nodemailer notification integrations</strong>.
+                </p>
+                <p className="about-paragraph">
+                  I love solving real-world problems through clean, type-safe code using <strong>TypeScript</strong>, managing workflows via <strong>Git & GitHub</strong>, and deploying projects directly to cloud environments like <strong>Render</strong>.
                 </p>
                 <p className="about-paragraph mb-0">
-                  When I'm not coding, you can find me reading tech blogs to keep up with industry trends, learning new skills, or playing basketball.
+                  When I'm not coding, you can find me reading tech blogs to keep up with industry trends, exploring open-source projects, or playing basketball.
                 </p>
               </div>
             </div>

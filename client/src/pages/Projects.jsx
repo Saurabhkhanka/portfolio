@@ -8,8 +8,8 @@ const Projects = () => {
 
     const projects = [
     {
-      title: 'Weather Forecast',
-      description: 'Weather app showing real-time forecast with dynamic visuals.',
+      title: 'Weather Forecast Portal',
+      description: 'A responsive weather forecast web app showing real-time atmospheric updates and predictions with dynamic visual states.',
       liveLink: 'https://weather-forecast-srsb.onrender.com',
       githubLink: 'https://github.com/Saurabhkhanka/weather',
       icon: 'ri-cloud-windy-line',
@@ -17,12 +17,28 @@ const Projects = () => {
     },
     {
       title: 'Gym Landing Page',
-      description: 'Static gym landing page created using basic HTML and CSS.',
+      description: 'A high-performance static fitness page featuring interactive section navigations and custom layouts built from scratch.',
       liveLink: 'https://saurabhkhanka.github.io/Fitness-/',
       githubLink: 'https://github.com/Saurabhkhanka/Fitness-',
       icon: 'ri-heart-pulse-line',
       tech: 'HTML5 & CSS3'
     },
+    {
+      title: 'Secure MERN Auth & Audit Portal',
+      description: 'A robust user account service featuring secure registrations, logins, verification filters, activity logs, and an admin audit panel.',
+      liveLink: '',
+      githubLink: 'https://github.com/Saurabhkhanka/portfolio',
+      icon: 'ri-shield-user-line',
+      tech: 'Node.js, Express & MongoDB'
+    },
+    {
+      title: 'Cross-Platform Fitness Native App',
+      description: 'A native mobile workout tracker app with state preservation and cache-optimized sync pipelines, designed for logging training data.',
+      liveLink: '',
+      githubLink: 'https://github.com/Saurabhkhanka/Fitness-',
+      icon: 'ri-smartphone-line',
+      tech: 'React Native & Redux Toolkit'
+    }
   ];
 
   return (

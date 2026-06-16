@@ -34,7 +34,7 @@ const Home = () => {
               <h1 className="hero-title">
                 Hi, I'm <span className="text-gradient">Saurabh</span> <span className="wave-emoji">👋</span>
               </h1>
-              <p className="hero-subtitle">Full Stack Developer | MERN Stack Enthusiast</p>
+              <p className="hero-subtitle">Full Stack Developer | React, Node.js, Next.js & React Native Specialist</p>
               <div className="hero-buttons mt-4 d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
                 <Link to="/projects" className="btn-hero-primary text-decoration-none">My Projects</Link>
                 <Link to="/contact" className="btn-hero-outline text-decoration-none">Contact Me</Link>
