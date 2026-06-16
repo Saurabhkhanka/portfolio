@@ -1509,9 +1509,288 @@
     }
 }
 
+/* ==========================================
+   Admin Dashboard Premium Custom Styles
+   ========================================== */
 
+.admin-dashboard-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #1e293b;
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0;
+    min-height: 85vh;
+}
 
+/* Background Glowing Blur Orbs for Admin Dashboard */
+.orb-admin-1 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.12;
+    z-index: 1;
+    background: #0d6efd; /* Blue */
+    top: 5%;
+    left: -5%;
+    pointer-events: none;
+    animation: floatOrbAdmin1 15s ease-in-out infinite alternate;
+}
 
+.orb-admin-2 {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.12;
+    z-index: 1;
+    background: #0dcaf0; /* Cyan */
+    bottom: 5%;
+    right: -5%;
+    pointer-events: none;
+    animation: floatOrbAdmin2 15s ease-in-out infinite alternate;
+    animation-delay: -7.5s;
+}
 
+@keyframes floatOrbAdmin1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.1); }
+}
 
+@keyframes floatOrbAdmin2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-40px, -30px) scale(1.1); }
+}
+
+/* Header underline styling matching contact heading */
+.heading-underline {
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, #0d6efd 0%, #0dcaf0 100%);
+    border-radius: 2px;
+}
+
+/* Glass Tabs Navigation */
+.admin-nav-tabs {
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.admin-tab-btn {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    border: none;
+}
+
+.admin-tab-btn.active {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.25);
+}
+
+.admin-tab-btn:not(.active):hover {
+    background: rgba(13, 110, 253, 0.06) !important;
+    color: #0d6efd !important;
+}
+
+/* Admin Glassmorphic Content Card Container */
+.admin-card-glass {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.admin-card-glass:hover {
+    border-color: rgba(13, 110, 253, 0.15);
+    box-shadow: 0 20px 40px rgba(13, 110, 253, 0.05);
+}
+
+/* Inner card styles for items */
+.admin-item-card {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(226, 232, 240, 0.7) !important;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.admin-item-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(13, 110, 253, 0.18) !important;
+    box-shadow: 0 12px 24px rgba(13, 110, 253, 0.04);
+}
+
+/* Colored accent left bars for lists */
+.border-left-primary {
+    border-left: 5px solid #0d6efd !important;
+}
+
+.border-left-secondary {
+    border-left: 5px solid #6c757d !important;
+}
+
+.border-left-warning {
+    border-left: 5px solid #ffc107 !important;
+}
+
+.border-left-info {
+    border-left: 5px solid #0dcaf0 !important;
+}
+
+.border-left-success {
+    border-left: 5px solid #198754 !important;
+}
+
+.border-left-danger {
+    border-left: 5px solid #dc3545 !important;
+}
+
+/* Section Header Labels */
+.admin-meta-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #64748b;
+    margin-bottom: 3px;
+}
+
+.admin-meta-value {
+    color: #1e293b;
+    font-weight: 550;
+    font-size: 0.95rem;
+}
+
+/* Custom rounded action buttons */
+.btn-admin-action-danger {
+    background: transparent;
+    color: #dc3545;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-radius: 12px;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-admin-action-danger:hover {
+    background: #dc3545;
+    color: #ffffff;
+    border-color: #dc3545;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Clear all header button */
+.btn-admin-clear {
+    background: linear-gradient(135deg, #dc3545 0%, #bd2130 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 8px 18px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.2);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-admin-clear:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.35);
+    background: linear-gradient(135deg, #c82333 0%, #a71d2a 100%);
+}
+
+.btn-admin-clear:active {
+    transform: translateY(0);
+}
+
+/* Accent Card Hover Glows */
+.admin-item-card.border-left-primary:hover {
+    box-shadow: 0 12px 24px rgba(13, 110, 253, 0.08);
+}
+.admin-item-card.border-left-secondary:hover {
+    box-shadow: 0 12px 24px rgba(108, 117, 125, 0.08);
+}
+.admin-item-card.border-left-warning:hover {
+    box-shadow: 0 12px 24px rgba(255, 193, 7, 0.08);
+}
+.admin-item-card.border-left-success:hover {
+    box-shadow: 0 12px 24px rgba(25, 135, 84, 0.08);
+}
+.admin-item-card.border-left-danger:hover {
+    box-shadow: 0 12px 24px rgba(220, 53, 69, 0.08);
+}
+
+/* Speech-bubble styled quotation container for messages */
+.admin-message-quote {
+    background: rgba(248, 250, 252, 0.8) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-left: 3px solid rgba(13, 110, 253, 0.4) !important;
+    border-radius: 14px;
+    padding: 1.25rem;
+    font-size: 0.92rem;
+    color: #334155;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+/* Custom status badges for role, activity, and verification */
+.admin-badge-verified {
+    background-color: rgba(25, 135, 84, 0.08) !important;
+    color: #198754 !important;
+    border: 1px solid rgba(25, 135, 84, 0.15) !important;
+}
+
+.admin-badge-unverified {
+    background-color: rgba(108, 117, 125, 0.08) !important;
+    color: #6c757d !important;
+    border: 1px solid rgba(108, 117, 125, 0.15) !important;
+}
+
+.admin-badge-admin {
+    background-color: rgba(255, 193, 7, 0.08) !important;
+    color: #b58105 !important;
+    border: 1px solid rgba(255, 193, 7, 0.25) !important;
+}
+
+.admin-badge-user {
+    background-color: rgba(13, 202, 240, 0.08) !important;
+    color: #0284c7 !important;
+    border: 1px solid rgba(13, 202, 240, 0.15) !important;
+}
+
+.admin-badge-login {
+    background-color: rgba(25, 135, 84, 0.08) !important;
+    color: #198754 !important;
+    border: 1px solid rgba(25, 135, 84, 0.15) !important;
+}
+
+.admin-badge-logout {
+    background-color: rgba(220, 53, 69, 0.08) !important;
+    color: #dc3545 !important;
+    border: 1px solid rgba(220, 53, 69, 0.15) !important;
+}
 
