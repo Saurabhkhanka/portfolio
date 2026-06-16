@@ -1,27 +1,16 @@
 import express from "express";
 import { 
-    registerController, 
-    verifyRegisterController, 
-    loginController, 
-    logoutController, 
-    getMeController, 
     getActivityLogsController, 
     getUsersController,
     deleteActivityLogController,
     clearAllActivityLogsController
 } from "../controllers/authController.js";
-import { requireSignIn, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/register", registerController);
-router.post("/verify-register", verifyRegisterController);
-router.post("/login", loginController);
-router.post("/logout", requireSignIn, logoutController);
-router.get("/me", requireSignIn, getMeController);
-router.get("/activity-logs", requireSignIn, isAdmin, getActivityLogsController);
-router.delete("/activity-logs/:id", requireSignIn, isAdmin, deleteActivityLogController);
-router.delete("/activity-logs", requireSignIn, isAdmin, clearAllActivityLogsController);
-router.get("/users", requireSignIn, isAdmin, getUsersController);
+router.get("/activity-logs", getActivityLogsController);
+router.delete("/activity-logs/:id", deleteActivityLogController);
+router.delete("/activity-logs", clearAllActivityLogsController);
+router.get("/users", getUsersController);
 
 export default router;

@@ -3,21 +3,12 @@ import Layout from '../components/Layout/Layout'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 
 const Contact = () => {
-  const { user } = useAuth()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name || "")
-      setEmail(user.email || "")
-    }
-  }, [user])
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
@@ -124,7 +115,6 @@ const Contact = () => {
                       value={name} 
                       onChange={(e)=>setName(e.target.value)} 
                       required 
-                      disabled={!!user}
                     />
                   </div>
 
@@ -140,7 +130,6 @@ const Contact = () => {
                       value={email} 
                       onChange={(e)=>setEmail(e.target.value)} 
                       required 
-                      disabled={!!user}
                     />
                   </div>
 

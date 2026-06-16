@@ -26,6 +26,7 @@ const Footer = () => {
               <li><Link to="/about" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> About</Link></li>
               <li><Link to="/projects" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Projects</Link></li>
               <li><Link to="/contact" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Contact</Link></li>
+              <li><Link to="/admin" className="footer-link-custom text-warning"><i className="ri-arrow-right-s-line text-warning"></i> Admin Dashboard</Link></li>
             </ul>
           </div>
 

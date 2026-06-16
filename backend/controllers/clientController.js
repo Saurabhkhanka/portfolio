@@ -9,7 +9,7 @@ export const clientController = async (req, res) => {
         if (!email) return res.status(400).send({ success: false, message: 'email required' })
         if (!message) return res.status(400).send({ success: false, message: 'message required' })
 
-        const userId = req.user.userId;
+        const userId = req.user?.userId || null;
 
         // save
         const clientInfo = await new clientModel({ userId, email, name, message }).save()
