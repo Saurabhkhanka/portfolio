@@ -37,6 +37,15 @@ const Home = () => {
               <p className="hero-subtitle">Full Stack Developer | React, Node.js, Next.js & React Native Specialist</p>
               <div className="hero-buttons mt-4 d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
                 <Link to="/projects" className="btn-hero-primary text-decoration-none">My Projects</Link>
+                <a 
+                  href={`${import.meta.env.VITE_API_URL}/api/v1/auth/resume/download`} 
+                  className="btn-hero-outline text-decoration-none"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  download
+                >
+                  <i className="ri-download-line me-1"></i> Resume
+                </a>
                 <Link to="/contact" className="btn-hero-outline text-decoration-none">Contact Me</Link>
               </div>
             </div>

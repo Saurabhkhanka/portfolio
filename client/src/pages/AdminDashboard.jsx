@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout/Layout";
+import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
     const [messages, setMessages] = useState([]);
     const [logs, setLogs] = useState([]);
     const [users, setUsers] = useState([]);
-    const [activeTab, setActiveTab] = useState("messages"); // "messages", "users", or "logs"
+    const [activeTab, setActiveTab] = useState("messages"); // "messages", "users", "logs", or "resume"
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [resumeBase64, setResumeBase64] = useState(null);
+    const [fileName, setFileName] = useState("");
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
@@ -47,6 +51,48 @@ const AdminDashboard = () => {
         if (ua.includes("Firefox")) return "Mozilla Firefox";
         if (ua.includes("Edge")) return "Microsoft Edge";
         return ua.split(" ")[0] || "Web Browser";
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (file.type !== "application/pdf") {
+            toast.error("Please upload a valid PDF file.");
+            e.target.value = null;
+            return;
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setResumeBase64(reader.result);
+            setFileName(file.name);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleUploadResume = async (e) => {
+        e.preventDefault();
+        if (!resumeBase64) {
+            toast.error("Please select a PDF file first.");
+            return;
+        }
+        setUploading(true);
+        try {
+            const res = await axios.post("/api/v1/auth/resume/upload", { resume: resumeBase64 });
+            if (res.data.success) {
+                toast.success("Resume uploaded successfully!");
+                setResumeBase64(null);
+                setFileName("");
+                const fileInput = document.getElementById("resume-input-field");
+                if (fileInput) fileInput.value = "";
+            } else {
+                toast.error(res.data.message || "Failed to upload resume.");
+            }
+        } catch (err) {
+            console.error("Resume upload error:", err);
+            toast.error(err.response?.data?.message || "Failed to upload resume.");
+        } finally {
+            setUploading(false);
+        }
     };
 
     return (
@@ -94,6 +140,17 @@ const AdminDashboard = () => {
                                 >
                                     <i className="ri-history-line me-1 align-middle"></i>
                                     Logins ({logs.length})
+                                </button>
+                            </li>
+                            <li className="nav-item">
+                                <button
+                                    className={`nav-link px-3 py-2 rounded-3 fw-bold border-0 ${
+                                        activeTab === "resume" ? "bg-primary text-white" : "text-muted bg-transparent"
+                                    }`}
+                                    onClick={() => setActiveTab("resume")}
+                                >
+                                    <i className="ri-file-pdf-line me-1 align-middle"></i>
+                                    Resume
                                 </button>
                             </li>
                         </ul>
@@ -219,7 +276,7 @@ const AdminDashboard = () => {
                             ))}
                         </div>
                     )
-                ) : (
+                ) : activeTab === "logs" ? (
                     logs.length === 0 ? (
                         <div className="card shadow-sm border-0 text-center p-5 rounded-4 bg-white">
                             <p className="text-muted mb-0 fs-5">No recent login activities recorded.</p>
@@ -268,6 +325,55 @@ const AdminDashboard = () => {
                             ))}
                         </div>
                     )
+                ) : (
+                    <div className="row justify-content-center animate-fade-in">
+                        <div className="col-lg-6 col-md-8">
+                            <div className="card border-0 shadow-sm p-5 rounded-4 bg-white text-center">
+                                <div className="mb-4">
+                                    <div className="info-icon-wrapper bg-primary text-white mx-auto rounded-circle d-flex align-items-center justify-content-center" style={{ width: "80px", height: "80px", fontSize: "2.5rem" }}>
+                                        <i className="ri-file-pdf-line"></i>
+                                    </div>
+                                </div>
+                                <h4 className="fw-bold text-dark mb-2">Upload Updated Resume</h4>
+                                <p className="text-muted mb-4">Select your latest professional PDF resume. It will overwrite the existing visitor download file.</p>
+                                
+                                <form onSubmit={handleUploadResume}>
+                                    <div className="mb-4 border-dashed rounded-4 p-4 text-center bg-light position-relative" style={{ border: "2px dashed #dee2e6" }}>
+                                        <input 
+                                            type="file" 
+                                            id="resume-input-field"
+                                            className="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer"
+                                            accept=".pdf" 
+                                            onChange={handleFileChange} 
+                                            style={{ cursor: "pointer" }}
+                                        />
+                                        <i className="ri-upload-cloud-2-line fs-1 text-muted d-block mb-2"></i>
+                                        <span className="text-muted fw-bold d-block">
+                                            {fileName || "Drag & Drop or Click to browse PDF"}
+                                        </span>
+                                        <span className="text-muted small mt-1 d-block">Only PDF files are supported</span>
+                                    </div>
+                                    <button 
+                                        type="submit" 
+                                        className="btn btn-primary w-100 rounded-3 py-3 fw-bold border-0"
+                                        disabled={uploading || !resumeBase64}
+                                        style={{ background: "linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%)" }}
+                                    >
+                                        {uploading ? (
+                                            <>
+                                                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                                Uploading...
+                                            </>
+                                        ) : (
+                                            <>
+                                                <i className="ri-send-plane-fill me-1"></i> Upload Resume
+                                            </>
+                                        )}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 )}
             </div>
         </Layout>
