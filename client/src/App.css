@@ -416,3 +416,154 @@
         transform: translateY(0);
     }
 }
+
+/* Premium Glassmorphic Navbar Styling */
+.custom-navbar {
+    background: rgba(15, 23, 42, 0.85) !important; /* Semi-transparent dark slate */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 16px 0;
+}
+
+.custom-navbar.navbar-scrolled {
+    background: rgba(15, 23, 42, 0.96) !important; /* More solid dark slate on scroll */
+    padding: 8px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* On Desktop, set custom layout heights. On mobile, let it adjust naturally */
+@media (min-width: 992px) {
+    .custom-navbar {
+        height: 11vh;
+        padding: 0;
+    }
+    .custom-navbar.navbar-scrolled {
+        height: 9vh;
+        padding: 0;
+    }
+}
+
+.navbar-brand-custom {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar-brand-custom i {
+    color: #0dcaf0;
+    font-size: 1.6rem;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-brand-custom:hover i {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.navbar-brand-custom:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.nav-link-custom {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-weight: 550;
+    padding: 0.5rem 1.2rem !important;
+    margin: 0 0.2rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-custom:hover {
+    color: #0dcaf0 !important;
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-custom.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.12) 0%, rgba(13, 202, 240, 0.12) 100%);
+    border-color: rgba(13, 110, 253, 0.2);
+    font-weight: 600;
+}
+
+/* Mobile Toggler Styling */
+.navbar-toggler-custom {
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler-custom:focus {
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25) !important;
+    outline: none;
+}
+
+/* Premium Dropdown menu styling for mobile viewports */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: rgba(15, 23, 42, 0.98);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    .nav-link-custom {
+        margin: 0.4rem 0;
+        text-align: center;
+    }
+}
+
+/* Premium Navigation Buttons */
+.btn-nav-login {
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    color: white !important;
+    border: none;
+    font-weight: 600;
+    border-radius: 24px;
+    padding: 8px 24px !important;
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-nav-login:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(13, 202, 240, 0.4);
+    color: white !important;
+}
+
+.btn-nav-logout {
+    border: 2px solid #ef4444;
+    color: #ef4444 !important;
+    background: transparent;
+    font-weight: 600;
+    border-radius: 24px;
+    padding: 6px 22px !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-nav-logout:hover {
+    background: #ef4444;
+    color: white !important;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.3);
+}
+
