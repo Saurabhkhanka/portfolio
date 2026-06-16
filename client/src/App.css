@@ -1149,6 +1149,185 @@
     transform: translateY(-2px);
 }
 
+/* About Page Premium Styling */
+.about-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    min-height: 80vh;
+    padding: 5rem 0;
+}
+
+.about-card-glass {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.about-image-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 6px;
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(13, 110, 253, 0.15);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-image-wrapper:hover {
+    transform: scale(1.03) rotate(3deg);
+    box-shadow: 0 15px 40px rgba(13, 110, 253, 0.3);
+}
+
+.about-image-wrapper img {
+    border: 4px solid #ffffff;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-paragraph {
+    color: #475569;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+}
+
+/* Info Cards for Background (Education, Specialization, Tools) */
+.info-card-custom {
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 20px;
+    padding: 1.75rem;
+    height: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.01);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.info-card-custom:hover {
+    transform: translateY(-5px);
+    border-color: rgba(13, 110, 253, 0.15);
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.04);
+}
+
+.info-card-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    margin-bottom: 1.25rem;
+    color: white;
+}
+
+.info-card-icon-box.bg-blue {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+.info-card-icon-box.bg-cyan {
+    background: linear-gradient(135deg, #0dcaf0 0%, #0d6efd 100%);
+    box-shadow: 0 4px 12px rgba(13, 202, 240, 0.25);
+}
+
+.info-card-icon-box.bg-purple {
+    background: linear-gradient(135deg, #764abc 0%, #ef4444 100%);
+    box-shadow: 0 4px 12px rgba(118, 74, 188, 0.2);
+}
+
+.info-card-title {
+    font-size: 1.15rem;
+    font-weight: 750;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.info-card-text {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Premium Coding Avatar Icon Styling */
+.about-avatar-container {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-avatar-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed rgba(13, 110, 253, 0.35);
+    animation: spinDashed 25s linear infinite;
+    pointer-events: none;
+}
+
+.about-avatar-icon-box {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(13, 110, 253, 0.25);
+    color: #ffffff;
+    font-size: 5.5rem;
+    transition: all 0.4s ease;
+    animation: floatingAvatar 6s ease-in-out infinite;
+    z-index: 2;
+}
+
+.about-avatar-container:hover .about-avatar-icon-box {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(13, 110, 253, 0.4);
+}
+
+.about-avatar-icon-box i {
+    animation: pulseAvatarIcon 3s ease-in-out infinite;
+}
+
+@keyframes spinDashed {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes floatingAvatar {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulseAvatarIcon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+
+
 
 
 

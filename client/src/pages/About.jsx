@@ -4,45 +4,85 @@ import Layout from '../components/Layout/Layout'
 const About = () => {
   return (
     <Layout>
-        {/* About Section */}
-      <section className="py-5">
-        <div className="container">
-          <div className="row align-items-center">
+      <section className="about-section">
+        <div className="container mt-4">
+          
+          {/* Main Card Wrapper */}
+          <div className="about-card-glass mb-5">
+            <div className="row align-items-center g-5">
+              
+              {/* Profile Avatar Icon Column */}
+              <div className="col-lg-4 text-center">
+                <div className="about-avatar-container">
+                  <div className="about-avatar-spinner"></div>
+                  <div className="about-avatar-icon-box">
+                    <i className="ri-code-s-slash-line"></i>
+                  </div>
+                </div>
+              </div>
 
-            {/* Profile Image */}
-            <div className="col-md-4 text-center mb-4 mb-md-0">
-              <img
-                src={'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1420&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'}
-                alt="Saurabh Singh Khanka"
-                className="img-fluid rounded-circle shadow"
-                style={{ maxWidth: '250px' }}
-              />
-            </div>
-
-            {/* Text Content */}
-            <div className="col-md-8">
-              <h2 className="mb-3">About Me</h2>
-              <p>
-                Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer passionate about crafting responsive web applications using modern technologies like React, Node.js, and MongoDB.
-              </p>
-              <p>
-                I have a strong foundation in computer science and love solving real-world problems through code. I'm constantly exploring new tools and frameworks to improve my development workflow.
-              </p>
-              <p>
-                When I'm not coding, I enjoy reading tech blogs, learning new skills, and playing basketball.
-              </p>
+              {/* Description Column */}
+              <div className="col-lg-8">
+                <h2 className="welcome-title text-start mb-2">About Me</h2>
+                <div className="welcome-line ms-0 mb-4" style={{ width: '50px' }}></div>
+                
+                <p className="about-paragraph">
+                  Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer passionate about crafting responsive, scalable, and dynamic web applications using modern technologies like React, Node.js, and MongoDB.
+                </p>
+                <p className="about-paragraph">
+                  I have a strong foundation in computer science and love solving real-world problems through clean and efficient code. I'm constantly exploring new tools and frameworks to optimize my development workflow and deliver premium user experiences.
+                </p>
+                <p className="about-paragraph mb-0">
+                  When I'm not coding, you can find me reading tech blogs to keep up with industry trends, learning new skills, or playing basketball.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Optional: Add education or experience */}
-          <div className="mt-5">
-            <h3 className="mb-3">My Background</h3>
-            <ul>
-              <li><strong>Education:</strong> MCA in AI & ML from Amity University</li>
-              <li><strong>Specialization:</strong> Full Stack Development, Backend Development, Frontend Development</li>
-              <li><strong>Tools:</strong> Git, GitHub, VS Code, Postman</li>
-            </ul>
+          {/* Background Sections Rendered as cards */}
+          <div className="row g-4 justify-content-center">
+            {/* Education Info Card */}
+            <div className="col-lg-4 col-md-6">
+              <div className="info-card-custom">
+                <div className="info-card-icon-box bg-blue">
+                  <i className="ri-graduation-cap-line"></i>
+                </div>
+                <h5 className="info-card-title">Education</h5>
+                <p className="info-card-text">
+                  <strong>MCA in AI & ML</strong>
+                  <br />
+                  Amity University
+                </p>
+              </div>
+            </div>
+
+            {/* Specialization Info Card */}
+            <div className="col-lg-4 col-md-6">
+              <div className="info-card-custom">
+                <div className="info-card-icon-box bg-cyan">
+                  <i className="ri-terminal-window-line"></i>
+                </div>
+                <h5 className="info-card-title">Specialization</h5>
+                <p className="info-card-text">
+                  Full Stack Development, Backend Development, Frontend Development
+                </p>
+              </div>
+            </div>
+
+            {/* Tools Info Card */}
+            <div className="col-lg-4 col-md-6">
+              <div className="info-card-custom">
+                <div className="info-card-icon-box bg-purple">
+                  <i className="ri-tools-line"></i>
+                </div>
+                <h5 className="info-card-title">Development Tools</h5>
+                <p className="info-card-text">
+                  Git, GitHub, VS Code, Postman
+                </p>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </Layout>
