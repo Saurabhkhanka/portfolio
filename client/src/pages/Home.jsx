@@ -1,19 +1,82 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../components/Layout/Layout'
 import { Link } from 'react-router-dom'
 
 
 const Home = () => {
+  const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
+  const heroSkills = [
+    { name: 'React.js', icon: 'ri-reactjs-fill', color: '#61DAFB', bg: 'rgba(97, 218, 251, 0.1)', desc: 'For building responsive and dynamic web interfaces.' },
+    { name: 'JavaScript (ES6+)', icon: 'ri-javascript-fill', color: '#F7DF1E', bg: 'rgba(247, 223, 30, 0.1)', desc: 'For programming powerful client-side logic and features.' },
+    { name: 'TypeScript', icon: 'ri-braces-line', color: '#3178C6', bg: 'rgba(49, 120, 198, 0.1)', desc: 'For adding scale and type safety to modern applications.' },
+    { name: 'Next.js', icon: 'ri-instance-line', color: '#ffffff', bg: 'rgba(255, 255, 255, 0.1)', desc: 'For lightning-fast server-rendered React applications.' },
+    { name: 'React Native', icon: 'ri-smartphone-line', color: '#0dcaf0', bg: 'rgba(13, 202, 240, 0.1)', desc: 'For building cross-platform native mobile applications.' },
+    { name: 'Node.js', icon: 'ri-nodejs-fill', color: '#339933', bg: 'rgba(51, 153, 51, 0.1)', desc: 'For high-performance server-side scripting and engines.' },
+    { name: 'MongoDB', icon: 'ri-database-2-fill', color: '#47A248', bg: 'rgba(71, 162, 72, 0.1)', desc: 'For scalable, flexible document-based database storage.' },
+    { name: 'MySQL', icon: 'ri-database-line', color: '#00758F', bg: 'rgba(0, 117, 143, 0.1)', desc: 'For modeling relational databases and managing structured data.' },
+    { name: 'Tailwind CSS', icon: 'ri-windy-line', color: '#38BDF8', bg: 'rgba(56, 189, 248, 0.1)', desc: 'For rapid UI design using utility-first styling classes.' }
+  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSkillIndex((prevIndex) => (prevIndex + 1) % heroSkills.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, [heroSkills.length]);
+
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="hero-section text-center">
+      <section className="hero-section text-center text-lg-start">
         <div className="container">
-          <h1 className="hero-title">Hi, I'm Saurabh</h1>
-          <p className="hero-subtitle">Full Stack Developer | MERN Stack Enthusiast</p>
-          <div className="hero-buttons mt-4">
-            <Link to="/projects" className="btn-hero-primary mx-2 text-decoration-none">My Projects</Link>
-            <Link to="/contact" className="btn-hero-outline mx-2 text-decoration-none">Contact Me</Link>
+          <div className="row align-items-center g-5">
+            {/* Left Column: Intro */}
+            <div className="col-lg-6">
+              <h1 className="hero-title">
+                Hi, I'm <span className="text-gradient">Saurabh</span> <span className="wave-emoji">👋</span>
+              </h1>
+              <p className="hero-subtitle">Full Stack Developer | MERN Stack Enthusiast</p>
+              <div className="hero-buttons mt-4 d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
+                <Link to="/projects" className="btn-hero-primary text-decoration-none">My Projects</Link>
+                <Link to="/contact" className="btn-hero-outline text-decoration-none">Contact Me</Link>
+              </div>
+            </div>
+
+            {/* Right Column: Skill Showcase Animation */}
+            <div className="col-lg-6 d-flex justify-content-center">
+              <div className="hero-skill-showcase-container">
+                <div className="glowing-orb orb-1"></div>
+                <div className="glowing-orb orb-2"></div>
+                <div className="skill-card-glass">
+                  <div className="skill-card-body animate-skill-content" key={currentSkillIndex}>
+                    <div 
+                      className="skill-icon-outer-wrapper"
+                      style={{ 
+                        color: heroSkills[currentSkillIndex].color, 
+                        background: heroSkills[currentSkillIndex].bg,
+                        boxShadow: `0 8px 30px ${heroSkills[currentSkillIndex].bg}`
+                      }}
+                    >
+                      <i className={`${heroSkills[currentSkillIndex].icon} skill-icon-animate`}></i>
+                    </div>
+                    <h3 className="skill-showcase-title">{heroSkills[currentSkillIndex].name}</h3>
+                    <p className="skill-showcase-desc">{heroSkills[currentSkillIndex].desc}</p>
+                    
+                    <div className="skill-dots-wrapper">
+                      {heroSkills.map((_, idx) => (
+                        <span 
+                          key={idx} 
+                          className={`skill-dot ${idx === currentSkillIndex ? 'active' : ''}`}
+                          onClick={() => setCurrentSkillIndex(idx)}
+                          style={{ 
+                            backgroundColor: idx === currentSkillIndex ? heroSkills[currentSkillIndex].color : 'rgba(255, 255, 255, 0.2)' 
+                          }}
+                        ></span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
