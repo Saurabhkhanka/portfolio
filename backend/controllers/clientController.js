@@ -43,3 +43,42 @@ export const clientInfoController = async (req, res)=>{
     res.status(500).json({ error: 'Server error' });
   }
 }
+
+export const deleteClientInfoController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: "Invalid message ID" });
+        }
+        const message = await clientModel.findByIdAndDelete(id);
+        if (!message) {
+            return res.status(404).json({ success: false, message: "Message not found" });
+        }
+        return res.status(200).json({
+            success: true,
+            message: "Message deleted successfully"
+        });
+    } catch (error) {
+        console.error("Error in deleteClientInfoController:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Server error while deleting message"
+        });
+    }
+};
+
+export const clearAllClientInfoController = async (req, res) => {
+    try {
+        await clientModel.deleteMany({});
+        return res.status(200).json({
+            success: true,
+            message: "All messages cleared successfully"
+        });
+    } catch (error) {
+        console.error("Error in clearAllClientInfoController:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Server error while clearing messages"
+        });
+    }
+};

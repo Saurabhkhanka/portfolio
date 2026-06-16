@@ -6,7 +6,9 @@ import {
     logoutController, 
     getMeController, 
     getActivityLogsController, 
-    getUsersController
+    getUsersController,
+    deleteActivityLogController,
+    clearAllActivityLogsController
 } from "../controllers/authController.js";
 import { requireSignIn, isAdmin } from "../middleware/authMiddleware.js";
 
@@ -18,6 +20,8 @@ router.post("/login", loginController);
 router.post("/logout", requireSignIn, logoutController);
 router.get("/me", requireSignIn, getMeController);
 router.get("/activity-logs", requireSignIn, isAdmin, getActivityLogsController);
+router.delete("/activity-logs/:id", requireSignIn, isAdmin, deleteActivityLogController);
+router.delete("/activity-logs", requireSignIn, isAdmin, clearAllActivityLogsController);
 router.get("/users", requireSignIn, isAdmin, getUsersController);
 
 export default router;
