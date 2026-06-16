@@ -5,6 +5,8 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Languages',
+      catIcon: 'ri-code-box-line',
+      catColor: '#0d6efd',
       skills: [
         { name: 'JavaScript (ES6+)', icon: 'ri-javascript-fill', color: '#F7DF1E' },
         { name: 'TypeScript', icon: 'ri-braces-line', color: '#3178C6' }
@@ -12,6 +14,8 @@ const Skills = () => {
     },
     {
       title: 'Frameworks & Libraries',
+      catIcon: 'ri-window-line',
+      catColor: '#0dcaf0',
       skills: [
         { name: 'React.js', icon: 'ri-reactjs-fill', color: '#61DAFB' },
         { name: 'Next.js', icon: 'ri-instance-line', color: '#111827' },
@@ -25,6 +29,8 @@ const Skills = () => {
     },
     {
       title: 'Back-End & Databases',
+      catIcon: 'ri-database-2-line',
+      catColor: '#198754',
       skills: [
         { name: 'Node.js', icon: 'ri-nodejs-fill', color: '#339933' },
         { name: 'Express.js', icon: 'ri-terminal-box-fill', color: '#828282' },
@@ -34,6 +40,8 @@ const Skills = () => {
     },
     {
       title: 'Tools & Platforms',
+      catIcon: 'ri-tools-line',
+      catColor: '#6c757d',
       skills: [
         { name: 'Git', icon: 'ri-git-branch-line', color: '#F05032' },
         { name: 'GitHub', icon: 'ri-github-fill', color: '#181717' },
@@ -45,6 +53,8 @@ const Skills = () => {
     },
     {
       title: 'Architecture & Integration',
+      catIcon: 'ri-git-merge-line',
+      catColor: '#764abc',
       skills: [
         { name: 'RESTful APIs', icon: 'ri-api-line', color: '#0d6efd' },
         { name: 'JSON', icon: 'ri-file-code-line', color: '#FF8C00' },
@@ -72,11 +82,22 @@ const Skills = () => {
           <div className="row g-4 justify-content-center">
             {skillCategories.map((category, index) => (
               <div key={index} className="col-12 col-md-6 col-lg-4">
-                <div className="skills-category-card">
-                  <h4 className="category-title mb-4">{category.title}</h4>
+                <div className="skills-category-card" style={{ '--cat-color': category.catColor }}>
+                  <h4 className="category-title mb-4">
+                    <i className={`${category.catIcon} me-2`} style={{ color: category.catColor }}></i>
+                    {category.title}
+                  </h4>
                   <div className="d-flex flex-wrap gap-2">
                     {category.skills.map((skill, sIdx) => (
-                      <div key={sIdx} className="skill-badge-custom" title={skill.name}>
+                      <div 
+                        key={sIdx} 
+                        className="skill-badge-custom" 
+                        title={skill.name}
+                        style={{
+                          '--skill-color': skill.color,
+                          '--skill-glow': `${skill.color}20`
+                        }}
+                      >
                         <i 
                           className={skill.icon} 
                           style={{ color: skill.color, fontSize: '1.2rem' }}
