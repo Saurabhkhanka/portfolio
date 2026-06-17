@@ -189,7 +189,7 @@ const AdminDashboard = () => {
                                                                     >
                                                                         <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-1">
                                                                             <span className="fw-bold text-dark small text-uppercase tracking-wider">
-                                                                                {subIndex === 0 ? "Initial Inquiry" : "Follow-up Message"}
+                                                                                {subIndex === 0 ? "Initial Inquiry" : "Additional Inquiry"}
                                                                             </span>
                                                                             <span className="text-muted small fw-medium">
                                                                                 <i className="ri-time-line me-1"></i>
