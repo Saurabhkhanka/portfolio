@@ -8,20 +8,27 @@ const Contact = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
+  const [submitting, setSubmitting] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
+    if (submitting) return;
+    setSubmitting(true)
     try {
       const res = await axios.post("/api/v1/auth/client", {email,name,message})
       if(res.data.success){
         toast.success(res.data.message)
-        navigate('/')
+        setTimeout(() => {
+          navigate('/')
+        }, 1500)
       }else{
         toast.error(res.data.message)
+        setSubmitting(false)
       }
     } catch (error) {
       toast.error('something went wrong')
+      setSubmitting(false)
     }
   }
 
@@ -148,8 +155,17 @@ const Contact = () => {
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="btn-submit-contact w-100">
-                    <i className="ri-send-plane-fill"></i> Send Message
+                  <button type="submit" className="btn-submit-contact w-100" disabled={submitting}>
+                    {submitting ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Sending Message...
+                      </>
+                    ) : (
+                      <>
+                        <i className="ri-send-plane-fill me-2"></i> Send Message
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
