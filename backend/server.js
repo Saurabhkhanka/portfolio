@@ -2,7 +2,6 @@ import express from "express"
 import dotenv from 'dotenv'
 import connectDB from "./db.js"
 import router from './routes/clientRoute.js'
-import authRouter from './routes/authRoute.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
@@ -20,7 +19,6 @@ app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 
 app.use('/api/v1/auth', router)
-app.use('/api/v1/auth', authRouter)
 
 app.listen(PORT, ()=>{
     console.log(`your portfolio server is running on port number ${PORT}`);

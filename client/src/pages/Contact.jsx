@@ -13,7 +13,7 @@ const Contact = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault()
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/auth/client`, {email,name,message})
+      const res = await axios.post("/api/v1/auth/client", {email,name,message})
       if(res.data.success){
         toast.success(res.data.message)
         navigate('/')
@@ -21,7 +21,7 @@ const Contact = () => {
         toast.error(res.data.message)
       }
     } catch (error) {
-      toast.error('something went wromg')
+      toast.error('something went wrong')
     }
   }
 

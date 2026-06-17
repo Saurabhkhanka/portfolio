@@ -10,7 +10,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import PageNotFound from './pages/PageNotFound'
 
 // Configure axios defaults globally
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:5500";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:3600";
 axios.defaults.withCredentials = true;
 
 function App() {
