@@ -3,6 +3,29 @@ import axios from "axios";
 import Layout from "../components/Layout/Layout";
 import { toast } from "react-toastify";
 
+// Helper to parse concatenated duplicate email messages
+const parseMessages = (rawMessage) => {
+    if (!rawMessage) return [];
+    
+    // Split by the divider: "\n\n---\n"
+    const parts = rawMessage.split("\n\n---\n");
+    
+    return parts.map((part) => {
+        // Check if it starts with [timestamp] header
+        const match = part.match(/^\[([^\]]+)\]\n([\s\S]*)$/);
+        if (match) {
+            return {
+                timestamp: match[1],
+                text: match[2].trim()
+            };
+        }
+        return {
+            timestamp: null, // First message doesn't have an inline timestamp
+            text: part.trim()
+        };
+    });
+};
+
 const AdminDashboard = () => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -139,7 +162,7 @@ const AdminDashboard = () => {
                                                     <span className="badge bg-secondary-subtle text-secondary rounded-circle px-3 py-2 fs-6">{index + 1}</span>
                                                 </div>
                                                 <div className="col-md-11">
-                                                    <div className="row g-3 mb-3">
+                                                    <div className="row g-3 mb-4">
                                                         <div className="col-sm-6">
                                                             <span className="admin-meta-label d-block">
                                                                 <i className="ri-user-line me-1 text-primary"></i> Client Name
@@ -153,14 +176,32 @@ const AdminDashboard = () => {
                                                             <a href={`mailto:${msg.email}`} className="text-primary text-decoration-none admin-meta-value">{msg.email}</a>
                                                         </div>
                                                     </div>
-                                                    <div className="row g-3">
+                                                    <div className="row g-3 mb-3">
                                                         <div className="col-12">
-                                                            <span className="admin-meta-label d-block">
-                                                                <i className="ri-chat-quote-line me-1 text-primary"></i> Message
+                                                            <span className="admin-meta-label d-block mb-2">
+                                                                <i className="ri-chat-quote-line me-1 text-primary"></i> Message History
                                                             </span>
-                                                            <p className="admin-message-quote mt-2 mb-0" style={{ whiteSpace: "pre-wrap" }}>
-                                                                {msg.message}
-                                                            </p>
+                                                            <div className="admin-messages-timeline d-flex flex-column gap-3">
+                                                                {parseMessages(msg.message).map((subMsg, subIndex) => (
+                                                                    <div 
+                                                                        className={`admin-message-bubble ${subIndex > 0 ? "admin-message-bubble-followup" : ""}`} 
+                                                                        key={subIndex}
+                                                                    >
+                                                                        <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-1">
+                                                                            <span className="fw-bold text-dark small text-uppercase tracking-wider">
+                                                                                {subIndex === 0 ? "Initial Inquiry" : "Follow-up Message"}
+                                                                            </span>
+                                                                            <span className="text-muted small fw-medium">
+                                                                                <i className="ri-time-line me-1"></i>
+                                                                                {subMsg.timestamp || (msg.createdAt && new Date(msg.createdAt).toLocaleString())}
+                                                                            </span>
+                                                                        </div>
+                                                                        <p className="mb-0 text-secondary" style={{ whiteSpace: "pre-wrap", fontSize: "0.93rem" }}>
+                                                                            {subMsg.text}
+                                                                        </p>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-light">
@@ -168,12 +209,12 @@ const AdminDashboard = () => {
                                                             className="btn-admin-action-danger"
                                                             onClick={() => handleDeleteMessage(msg._id)}
                                                         >
-                                                            <i className="ri-delete-bin-line"></i> Delete
+                                                            <i className="ri-delete-bin-line"></i> Delete Inquiry Thread
                                                         </button>
                                                         {msg.createdAt && (
                                                             <span className="text-muted small d-flex align-items-center gap-1 fw-medium">
-                                                                <i className="ri-time-line text-muted"></i>
-                                                                {new Date(msg.createdAt).toLocaleString()}
+                                                                <i className="ri-calendar-line text-muted"></i>
+                                                                First Received: {new Date(msg.createdAt).toLocaleDateString()}
                                                             </span>
                                                         )}
                                                     </div>
