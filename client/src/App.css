@@ -1794,3 +1794,35 @@
     border: 1px solid rgba(220, 53, 69, 0.15) !important;
 }
 
+/* Multi-message Timeline & Chat Bubble Styles */
+.admin-messages-timeline {
+    position: relative;
+}
+
+.admin-message-bubble {
+    background: rgba(248, 250, 252, 0.75) !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    border-left: 4px solid #0d6efd !important;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
+}
+
+.admin-message-bubble:hover {
+    transform: translateX(4px);
+    background: #ffffff !important;
+    border-color: rgba(13, 110, 253, 0.15) !important;
+    border-left-color: #0dcaf0 !important;
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.04);
+}
+
+.admin-message-bubble-followup {
+    border-left-color: #0dcaf0 !important;
+}
+
+.admin-message-bubble-followup:hover {
+    border-left-color: #764abc !important;
+}
+
+

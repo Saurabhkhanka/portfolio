@@ -3,34 +3,32 @@ import Layout from '../components/Layout/Layout'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 
 const Contact = () => {
-  const { user } = useAuth()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
+  const [submitting, setSubmitting] = useState(false)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (user) {
-      setName(user.name || "")
-      setEmail(user.email || "")
-    }
-  }, [user])
 
   const handleSubmit = async (e)=>{
     e.preventDefault()
+    if (submitting) return;
+    setSubmitting(true)
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/auth/client`, {email,name,message})
+      const res = await axios.post("/api/v1/auth/client", {email,name,message})
       if(res.data.success){
         toast.success(res.data.message)
-        navigate('/')
+        setTimeout(() => {
+          navigate('/')
+        }, 1500)
       }else{
         toast.error(res.data.message)
+        setSubmitting(false)
       }
     } catch (error) {
-      toast.error('something went wromg')
+      toast.error('something went wrong')
+      setSubmitting(false)
     }
   }
 
@@ -124,7 +122,6 @@ const Contact = () => {
                       value={name} 
                       onChange={(e)=>setName(e.target.value)} 
                       required 
-                      disabled={!!user}
                     />
                   </div>
 
@@ -140,7 +137,6 @@ const Contact = () => {
                       value={email} 
                       onChange={(e)=>setEmail(e.target.value)} 
                       required 
-                      disabled={!!user}
                     />
                   </div>
 
@@ -159,8 +155,17 @@ const Contact = () => {
                     ></textarea>
                   </div>
 
-                  <button type="submit" className="btn-submit-contact w-100">
-                    <i className="ri-send-plane-fill"></i> Send Message
+                  <button type="submit" className="btn-submit-contact w-100" disabled={submitting}>
+                    {submitting ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                        Sending Message...
+                      </>
+                    ) : (
+                      <>
+                        <i className="ri-send-plane-fill me-2"></i> Send Message
+                      </>
+                    )}
                   </button>
                 </form>
               </div>

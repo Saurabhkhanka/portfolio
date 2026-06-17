@@ -3,11 +3,31 @@ import axios from "axios";
 import Layout from "../components/Layout/Layout";
 import { toast } from "react-toastify";
 
+// Helper to parse concatenated duplicate email messages
+const parseMessages = (rawMessage) => {
+    if (!rawMessage) return [];
+    
+    // Split by the divider: "\n\n---\n"
+    const parts = rawMessage.split("\n\n---\n");
+    
+    return parts.map((part) => {
+        // Check if it starts with [timestamp] header
+        const match = part.match(/^\[([^\]]+)\]\n([\s\S]*)$/);
+        if (match) {
+            return {
+                timestamp: match[1],
+                text: match[2].trim()
+            };
+        }
+        return {
+            timestamp: null, // First message doesn't have an inline timestamp
+            text: part.trim()
+        };
+    });
+};
+
 const AdminDashboard = () => {
     const [messages, setMessages] = useState([]);
-    const [logs, setLogs] = useState([]);
-    const [users, setUsers] = useState([]);
-    const [activeTab, setActiveTab] = useState("messages"); // "messages", "users", or "logs"
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [confirmModal, setConfirmModal] = useState({
@@ -64,61 +84,12 @@ const AdminDashboard = () => {
         );
     };
 
-    const handleDeleteLog = (id) => {
-        triggerConfirm(
-            "Delete Login Log",
-            "Are you sure you want to delete this activity log entry?",
-            async () => {
-                try {
-                    const res = await axios.delete(`/api/v1/auth/activity-logs/${id}`);
-                    if (res.data.success) {
-                        setLogs(prev => prev.filter(log => log._id !== id));
-                        toast.success(res.data.message || "Log entry deleted successfully");
-                    }
-                } catch (err) {
-                    console.error("Error deleting log:", err);
-                    toast.error(err.response?.data?.message || "Failed to delete log entry.");
-                }
-            }
-        );
-    };
-
-    const handleClearAllLogs = () => {
-        triggerConfirm(
-            "Clear All Activity Logs",
-            "WARNING: Are you absolutely sure you want to clear ALL login activity logs? This action cannot be undone.",
-            async () => {
-                try {
-                    const res = await axios.delete("/api/v1/auth/activity-logs");
-                    if (res.data.success) {
-                        setLogs([]);
-                        toast.success(res.data.message || "All activity logs cleared successfully");
-                    }
-                } catch (err) {
-                    console.error("Error clearing logs:", err);
-                    toast.error(err.response?.data?.message || "Failed to clear activity logs.");
-                }
-            }
-        );
-    };
-
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const [messagesRes, logsRes, usersRes] = await Promise.all([
-                    axios.get("/api/v1/auth/clintInfo"),
-                    axios.get("/api/v1/auth/activity-logs"),
-                    axios.get("/api/v1/auth/users")
-                ]);
-
+                const messagesRes = await axios.get("/api/v1/auth/clintInfo");
                 if (messagesRes.data.success) {
                     setMessages(messagesRes.data.messages || []);
-                }
-                if (logsRes.data.success) {
-                    setLogs(logsRes.data.logs || []);
-                }
-                if (usersRes.data.success) {
-                    setUsers(usersRes.data.users || []);
                 }
             } catch (err) {
                 console.error("Error fetching dashboard data:", err);
@@ -130,16 +101,6 @@ const AdminDashboard = () => {
 
         fetchDashboardData();
     }, []);
-
-    // Helper to format user agent strings
-    const formatUserAgent = (ua) => {
-        if (!ua || ua === "unknown") return "Unknown Client";
-        if (ua.includes("Chrome")) return "Google Chrome";
-        if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
-        if (ua.includes("Firefox")) return "Mozilla Firefox";
-        if (ua.includes("Edge")) return "Microsoft Edge";
-        return ua.split(" ")[0] || "Web Browser";
-    };
 
     return (
         <Layout>
@@ -155,48 +116,7 @@ const AdminDashboard = () => {
                                 <span className="text-gradient">Admin Dashboard</span>
                                 <div className="heading-underline"></div>
                             </h2>
-                            <p className="text-muted mt-3">Monitor contact form inquiries, registered profiles, and login activity logs.</p>
-                        </div>
-                    </div>
-
-                    {/* Tab Navigation */}
-                    <div className="row mb-5">
-                        <div className="col-12">
-                            <ul className="nav nav-pills justify-content-center admin-nav-tabs p-2 border-0 gap-2 mx-auto" style={{ maxWidth: "600px" }}>
-                                <li className="nav-item">
-                                    <button
-                                        className={`nav-link px-4 py-2 rounded-4 fw-bold admin-tab-btn ${
-                                            activeTab === "messages" ? "active" : "text-muted bg-transparent"
-                                        }`}
-                                        onClick={() => setActiveTab("messages")}
-                                    >
-                                        <i className="ri-mail-line me-1 align-middle"></i>
-                                        Inquiries ({messages.length})
-                                    </button>
-                                </li>
-                                <li className="nav-item">
-                                    <button
-                                        className={`nav-link px-4 py-2 rounded-4 fw-bold admin-tab-btn ${
-                                            activeTab === "users" ? "active" : "text-muted bg-transparent"
-                                        }`}
-                                        onClick={() => setActiveTab("users")}
-                                    >
-                                        <i className="ri-user-line me-1 align-middle"></i>
-                                        Users ({users.length})
-                                    </button>
-                                </li>
-                                <li className="nav-item">
-                                    <button
-                                        className={`nav-link px-4 py-2 rounded-4 fw-bold admin-tab-btn ${
-                                            activeTab === "logs" ? "active" : "text-muted bg-transparent"
-                                        }`}
-                                        onClick={() => setActiveTab("logs")}
-                                    >
-                                        <i className="ri-history-line me-1 align-middle"></i>
-                                        Logins ({logs.length})
-                                    </button>
-                                </li>
-                            </ul>
+                            <p className="text-muted mt-3">Monitor contact form inquiries.</p>
                         </div>
                     </div>
 
@@ -211,240 +131,100 @@ const AdminDashboard = () => {
                             <i className="ri-error-warning-line me-2 fs-4 align-middle"></i>
                             {error}
                         </div>
-                    ) : activeTab === "messages" ? (
-                        messages.length === 0 ? (
-                            <div className="admin-card-glass text-center p-5">
-                                <p className="text-muted mb-0 fs-5">No client submissions found.</p>
-                            </div>
-                        ) : (
-                            <div className="admin-card-glass p-4 p-md-5">
-                                <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light flex-wrap gap-2">
-                                    <span className="text-dark fw-bold fs-5">
-                                        <i className="ri-mail-line text-primary me-2"></i> 
-                                        Inquiry Submissions <span className="badge bg-primary rounded-pill ms-2">{messages.length}</span>
-                                    </span>
-                                    <button 
-                                        className="btn-admin-clear"
-                                        onClick={handleClearAllMessages}
-                                    >
-                                        <i className="ri-delete-bin-line"></i> Clear All Inquiries
-                                    </button>
-                                </div>
-                                <div className="row g-4">
-                                    {messages.map((msg, index) => (
-                                        <div className="col-12 animate-fade-in" key={msg._id || index}>
-                                            <div 
-                                                className={`card border-0 shadow-sm p-4 admin-item-card ${
-                                                    index % 2 === 0 ? "border-left-secondary" : "border-left-primary"
-                                                }`}
-                                            >
-                                                <div className="row align-items-center">
-                                                    <div className="col-md-1 d-none d-md-block text-center">
-                                                        <span className="badge bg-secondary-subtle text-secondary rounded-circle px-3 py-2 fs-6">{index + 1}</span>
-                                                    </div>
-                                                    <div className="col-md-11">
-                                                        <div className="row g-3 mb-3">
-                                                            <div className="col-sm-6">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-user-line me-1 text-primary"></i> Client Name
-                                                                </span>
-                                                                <span className="admin-meta-value">{msg.name}</span>
-                                                            </div>
-                                                            <div className="col-sm-6">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-mail-line me-1 text-primary"></i> Email Address
-                                                                </span>
-                                                                <a href={`mailto:${msg.email}`} className="text-primary text-decoration-none admin-meta-value">{msg.email}</a>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row g-3">
-                                                            <div className="col-12">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-chat-quote-line me-1 text-primary"></i> Message
-                                                                </span>
-                                                                <p className="admin-message-quote mt-2 mb-0" style={{ whiteSpace: "pre-wrap" }}>
-                                                                    {msg.message}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-light">
-                                                            <button
-                                                                className="btn-admin-action-danger"
-                                                                onClick={() => handleDeleteMessage(msg._id)}
-                                                            >
-                                                                <i className="ri-delete-bin-line"></i> Delete
-                                                            </button>
-                                                            {msg.createdAt && (
-                                                                <span className="text-muted small d-flex align-items-center gap-1 fw-medium">
-                                                                    <i className="ri-time-line text-muted"></i>
-                                                                    {new Date(msg.createdAt).toLocaleString()}
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )
-                    ) : activeTab === "users" ? (
-                        users.length === 0 ? (
-                            <div className="admin-card-glass text-center p-5">
-                                <p className="text-muted mb-0 fs-5">No registered users found.</p>
-                            </div>
-                        ) : (
-                            <div className="admin-card-glass p-4 p-md-5">
-                                <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light">
-                                    <span className="text-dark fw-bold fs-5">
-                                        <i className="ri-user-line text-primary me-2"></i> 
-                                        Registered User Profiles <span className="badge bg-primary rounded-pill ms-2">{users.length}</span>
-                                    </span>
-                                </div>
-                                <div className="row g-4">
-                                    {users.map((u, index) => (
-                                        <div className="col-12" key={u._id || index}>
-                                            <div 
-                                                className={`card border-0 shadow-sm p-4 admin-item-card ${
-                                                    u.role === "admin" ? "border-left-warning" : "border-left-primary"
-                                                }`}
-                                            >
-                                                <div className="row align-items-center">
-                                                    <div className="col-md-1 d-none d-md-block text-center">
-                                                        <span className="badge bg-secondary-subtle text-secondary rounded-circle px-3 py-2 fs-6">{index + 1}</span>
-                                                    </div>
-                                                    <div className="col-md-11">
-                                                        <div className="row g-3 align-items-center text-center text-md-start">
-                                                            <div className="col-md-3">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-user-3-line me-1 text-primary"></i> Full Name
-                                                                </span>
-                                                                <span className="admin-meta-value fw-bold text-dark">{u.name}</span>
-                                                            </div>
-                                                            <div className="col-md-4">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-mail-line me-1 text-primary"></i> Email Address
-                                                                </span>
-                                                                <a href={`mailto:${u.email}`} className="text-primary text-decoration-none admin-meta-value small">{u.email}</a>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-shield-user-line me-1 text-primary"></i> Role
-                                                                </span>
-                                                                <span className={`badge text-uppercase px-3 py-2 rounded-pill small fw-bold d-inline-flex align-items-center gap-1 ${
-                                                                    u.role === "admin" ? "admin-badge-admin" : "admin-badge-user"
-                                                                }`}>
-                                                                    {u.role === "admin" ? <i className="ri-vip-crown-fill small"></i> : <i className="ri-user-line small"></i>}
-                                                                    {u.role}
-                                                                </span>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-checkbox-circle-line me-1 text-primary"></i> Status
-                                                                </span>
-                                                                <span className={`badge text-uppercase px-3 py-2 rounded-pill small fw-bold d-inline-flex align-items-center gap-1 ${
-                                                                    u.isVerified ? "admin-badge-verified" : "admin-badge-unverified"
-                                                                }`}>
-                                                                    {u.isVerified ? <i className="ri-shield-check-fill small"></i> : <i className="ri-error-warning-fill small"></i>}
-                                                                    {u.isVerified ? "Verified" : "Unverified"}
-                                                                </span>
-                                                            </div>
-                                                            <div className="col-md-1 text-md-end">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-calendar-line me-1 text-primary"></i> Joined
-                                                                </span>
-                                                                <span className="small text-muted fw-semibold">{new Date(u.createdAt).toLocaleDateString()}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )
+                    ) : messages.length === 0 ? (
+                        <div className="admin-card-glass text-center p-5">
+                            <p className="text-muted mb-0 fs-5">No client submissions found.</p>
+                        </div>
                     ) : (
-                        logs.length === 0 ? (
-                            <div className="admin-card-glass text-center p-5">
-                                <p className="text-muted mb-0 fs-5">No recent login activities recorded.</p>
+                        <div className="admin-card-glass p-4 p-md-5">
+                            <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light flex-wrap gap-2">
+                                <span className="text-dark fw-bold fs-5">
+                                    <i className="ri-mail-line text-primary me-2"></i> 
+                                    Inquiry Submissions <span className="badge bg-primary rounded-pill ms-2">{messages.length}</span>
+                                </span>
+                                <button 
+                                    className="btn-admin-clear"
+                                    onClick={handleClearAllMessages}
+                                >
+                                    <i className="ri-delete-bin-line"></i> Clear All Inquiries
+                                </button>
                             </div>
-                        ) : (
-                            <div className="admin-card-glass p-4 p-md-5">
-                                <div className="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-light flex-wrap gap-2">
-                                    <span className="text-dark fw-bold fs-5">
-                                        <i className="ri-history-line text-primary me-2"></i> 
-                                        Login Activity Audit Logs <span className="badge bg-primary rounded-pill ms-2">{logs.length}</span>
-                                    </span>
-                                    <button 
-                                        className="btn-admin-clear"
-                                        onClick={handleClearAllLogs}
-                                    >
-                                        <i className="ri-delete-bin-line"></i> Clear All Logins
-                                    </button>
-                                </div>
-                                <div className="row g-4">
-                                    {logs.map((log, index) => (
-                                        <div className="col-12 animate-fade-in" key={log._id || index}>
-                                            <div 
-                                                className={`card border-0 shadow-sm p-4 admin-item-card ${
-                                                    log.action === "login" ? "border-left-success" : "border-left-danger"
-                                                }`}
-                                            >
-                                                <div className="row align-items-center">
-                                                    <div className="col-md-2 text-center text-md-start mb-3 mb-md-0">
-                                                        <span className={`badge text-uppercase px-3 py-2 fs-6 rounded-3 d-inline-flex align-items-center gap-1 ${
-                                                            log.action === "login" ? "admin-badge-login" : "admin-badge-logout"
-                                                        }`}>
-                                                            <i className={`${log.action === "login" ? "ri-login-box-line" : "ri-logout-box-line"} align-middle`}></i>
-                                                            {log.action}
-                                                        </span>
+                            <div className="row g-4">
+                                {messages.map((msg, index) => (
+                                    <div className="col-12 animate-fade-in" key={msg._id || index}>
+                                        <div 
+                                            className={`card border-0 shadow-sm p-4 admin-item-card ${
+                                                index % 2 === 0 ? "border-left-secondary" : "border-left-primary"
+                                            }`}
+                                        >
+                                            <div className="row align-items-center">
+                                                <div className="col-md-1 d-none d-md-block text-center">
+                                                    <span className="badge bg-secondary-subtle text-secondary rounded-circle px-3 py-2 fs-6">{index + 1}</span>
+                                                </div>
+                                                <div className="col-md-11">
+                                                    <div className="row g-3 mb-4">
+                                                        <div className="col-sm-6">
+                                                            <span className="admin-meta-label d-block">
+                                                                <i className="ri-user-line me-1 text-primary"></i> Client Name
+                                                            </span>
+                                                            <span className="admin-meta-value">{msg.name}</span>
+                                                        </div>
+                                                        <div className="col-sm-6">
+                                                            <span className="admin-meta-label d-block">
+                                                                <i className="ri-mail-line me-1 text-primary"></i> Email Address
+                                                            </span>
+                                                            <a href={`mailto:${msg.email}`} className="text-primary text-decoration-none admin-meta-value">{msg.email}</a>
+                                                        </div>
                                                     </div>
-                                                    <div className="col-md-10">
-                                                        <div className="row g-3 text-center text-md-start align-items-center">
-                                                            <div className="col-md-3">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-user-shared-line me-1 text-primary"></i> User Email
-                                                                </span>
-                                                                <span className="admin-meta-value">{log.email}</span>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-global-line me-1 text-primary"></i> IP Address
-                                                                </span>
-                                                                <span className="admin-meta-value small">{log.ip}</span>
-                                                            </div>
-                                                            <div className="col-md-3">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-macbook-line me-1 text-primary"></i> Browser / OS
-                                                                </span>
-                                                                <span className="admin-meta-value small" title={log.userAgent}>{formatUserAgent(log.userAgent)}</span>
-                                                            </div>
-                                                            <div className="col-md-2">
-                                                                <span className="admin-meta-label d-block">
-                                                                    <i className="ri-time-line me-1 text-primary"></i> Time
-                                                                </span>
-                                                                <span className="small text-muted fw-semibold">{new Date(log.createdAt).toLocaleString()}</span>
-                                                            </div>
-                                                            <div className="col-md-2 text-md-end">
-                                                                <button
-                                                                    className="btn-admin-action-danger justify-content-center mx-auto mx-md-0 ms-md-auto"
-                                                                    onClick={() => handleDeleteLog(log._id)}
-                                                                    title="Delete Log Entry"
-                                                                >
-                                                                    <i className="ri-delete-bin-line"></i> Delete
-                                                                </button>
+                                                    <div className="row g-3 mb-3">
+                                                        <div className="col-12">
+                                                            <span className="admin-meta-label d-block mb-2">
+                                                                <i className="ri-chat-quote-line me-1 text-primary"></i> Message History
+                                                            </span>
+                                                            <div className="admin-messages-timeline d-flex flex-column gap-3">
+                                                                {parseMessages(msg.message).map((subMsg, subIndex) => (
+                                                                    <div 
+                                                                        className={`admin-message-bubble ${subIndex > 0 ? "admin-message-bubble-followup" : ""}`} 
+                                                                        key={subIndex}
+                                                                    >
+                                                                        <div className="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-1">
+                                                                            <span className="fw-bold text-dark small text-uppercase tracking-wider">
+                                                                                {subIndex === 0 ? "Initial Inquiry" : "Additional Inquiry"}
+                                                                            </span>
+                                                                            <span className="text-muted small fw-medium">
+                                                                                <i className="ri-time-line me-1"></i>
+                                                                                {subMsg.timestamp || (msg.createdAt && new Date(msg.createdAt).toLocaleString())}
+                                                                            </span>
+                                                                        </div>
+                                                                        <p className="mb-0 text-secondary" style={{ whiteSpace: "pre-wrap", fontSize: "0.93rem" }}>
+                                                                            {subMsg.text}
+                                                                        </p>
+                                                                    </div>
+                                                                ))}
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-light">
+                                                        <button
+                                                            className="btn-admin-action-danger"
+                                                            onClick={() => handleDeleteMessage(msg._id)}
+                                                        >
+                                                            <i className="ri-delete-bin-line"></i> Delete Inquiry Thread
+                                                        </button>
+                                                        {msg.createdAt && (
+                                                            <span className="text-muted small d-flex align-items-center gap-1 fw-medium">
+                                                                <i className="ri-calendar-line text-muted"></i>
+                                                                First Received: {new Date(msg.createdAt).toLocaleDateString()}
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
-                                </div>
+                                    </div>
+                                ))}
                             </div>
-                        )
+                        </div>
                     )}
 
                     {/* Custom Confirmation Modal */}

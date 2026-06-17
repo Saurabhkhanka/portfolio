@@ -1,48 +1,29 @@
 import { Route, Routes } from 'react-router-dom'
+import axios from 'axios'
 import './App.css'
 import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
 import Skills from './pages/Skills'
 import Contact from './pages/Contact'
-import Login from './pages/Login'
-import Register from './pages/Register'
 import AdminDashboard from './pages/AdminDashboard'
 import PageNotFound from './pages/PageNotFound'
-import ProtectedRoute from './components/ProtectedRoute'
-import { AuthProvider } from './context/AuthContext'
+
+// Configure axios defaults globally
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:3600";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/projects' element={
-          <ProtectedRoute>
-            <Projects/>
-          </ProtectedRoute>
-        }/>
-        <Route path='/skills' element={
-          <ProtectedRoute>
-            <Skills/>
-          </ProtectedRoute>
-        }/>
-        <Route path='/contact' element={
-          <ProtectedRoute>
-            <Contact/>
-          </ProtectedRoute>
-        }/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-        <Route path='/admin' element={
-          <ProtectedRoute requiredRole="admin">
-            <AdminDashboard/>
-          </ProtectedRoute>
-        }/>
-        <Route path='*' element={<PageNotFound/>}/>
-      </Routes >
-    </AuthProvider>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/projects' element={<Projects/>}/>
+      <Route path='/skills' element={<Skills/>}/>
+      <Route path='/contact' element={<Contact/>}/>
+      <Route path='/admin' element={<AdminDashboard/>}/>
+      <Route path='*' element={<PageNotFound/>}/>
+    </Routes >
   )
 }
 

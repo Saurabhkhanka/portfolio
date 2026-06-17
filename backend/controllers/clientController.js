@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import clientModel from "../models/clientModel.js"
+import userModel from "../models/userModel.js"
 
 export const clientController = async (req, res) => {
     try {
@@ -9,10 +10,25 @@ export const clientController = async (req, res) => {
         if (!email) return res.status(400).send({ success: false, message: 'email required' })
         if (!message) return res.status(400).send({ success: false, message: 'message required' })
 
-        const userId = req.user.userId;
+        const userId = req.user?.userId || null;
+        const normalizedEmail = email.toLowerCase().trim();
 
-        // save
-        const clientInfo = await new clientModel({ userId, email, name, message }).save()
+        // Check if message with the same email already exists
+        const existingClient = await clientModel.findOne({ email: normalizedEmail });
+
+        let clientInfo;
+        if (existingClient) {
+            // Append new message with timestamp prefix
+            const formattedDate = new Date().toLocaleString('en-US', { hour12: true });
+            const dateHeader = `\n\n---\n[${formattedDate}]\n`;
+            existingClient.message = `${existingClient.message}${dateHeader}${message}`;
+            existingClient.name = name.trim(); // Update name in case of typo fix
+            if (userId) existingClient.userId = userId;
+            clientInfo = await existingClient.save();
+        } else {
+            // Save as a new inquiry
+            clientInfo = await new clientModel({ userId, email: normalizedEmail, name: name.trim(), message }).save();
+        }
 
         res.status(201).send({
             success:true,
