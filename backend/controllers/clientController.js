@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import clientModel from "../models/clientModel.js"
+import userModel from "../models/userModel.js"
 
 export const clientController = async (req, res) => {
     try {
