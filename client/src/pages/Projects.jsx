@@ -2,11 +2,19 @@ import React from 'react'
 import Layout from '../components/Layout/Layout'
 
 
-  
+
 
 const Projects = () => {
 
-    const projects = [
+  const projects = [
+    {
+      title: 'College Canteen Automation System',
+      description: 'A secure, production-ready full-stack food ordering platform featuring a Backend-for-Frontend (BFF) secure cookie auth architecture, atomic stock controls, and automated email receipts.',
+      liveLink: 'https://canteen-psi-three.vercel.app/',
+      githubLink: 'https://github.com/Saurabhkhanka/canteen',
+      icon: 'ri-restaurant-line',
+      tech: 'Next.js, Node.js & MongoDB'
+    },
     {
       title: 'Weather Forecast Portal',
       description: 'A responsive weather forecast web app showing real-time atmospheric updates and predictions with dynamic visual states.',
@@ -52,7 +60,7 @@ const Projects = () => {
               Explore my recent client works, web applications, and landing pages built using modern development techniques.
             </p>
           </div>
-          
+
           <div className="row g-4 justify-content-center">
             {projects.map((project, index) => (
               <div key={index} className="col-md-6 col-lg-4">
