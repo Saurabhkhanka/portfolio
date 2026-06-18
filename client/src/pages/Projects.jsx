@@ -13,6 +13,7 @@ const Projects = () => {
       liveLink: 'https://canteen-psi-three.vercel.app/',
       githubLink: 'https://github.com/Saurabhkhanka/canteen',
       icon: 'ri-restaurant-line',
+      image: '/projects/canteen.png',
       tech: 'Next.js, Node.js & MongoDB'
     },
     {
@@ -21,6 +22,7 @@ const Projects = () => {
       liveLink: 'https://weather-forecast-srsb.onrender.com',
       githubLink: 'https://github.com/Saurabhkhanka/weather',
       icon: 'ri-cloud-windy-line',
+      image: '/projects/weather.png',
       tech: 'React & REST API'
     },
     {
@@ -29,6 +31,7 @@ const Projects = () => {
       liveLink: 'https://saurabhkhanka.github.io/Fitness-/',
       githubLink: 'https://github.com/Saurabhkhanka/Fitness-',
       icon: 'ri-heart-pulse-line',
+      image: '/projects/gym.png',
       tech: 'HTML5 & CSS3'
     },
     {
@@ -37,6 +40,7 @@ const Projects = () => {
       liveLink: '',
       githubLink: 'https://github.com/Saurabhkhanka/portfolio',
       icon: 'ri-shield-user-line',
+      image: '/projects/auth.png',
       tech: 'Node.js, Express & MongoDB'
     },
     {
@@ -45,6 +49,7 @@ const Projects = () => {
       liveLink: '',
       githubLink: 'https://github.com/Saurabhkhanka/Fitness-',
       icon: 'ri-smartphone-line',
+      image: '/projects/native.png',
       tech: 'React Native & Redux Toolkit'
     }
   ];
@@ -65,8 +70,11 @@ const Projects = () => {
             {projects.map((project, index) => (
               <div key={index} className="col-md-6 col-lg-4">
                 <div className={`project-card-custom proj-${index}`}>
-                  <div className="project-banner-fallback">
-                    <i className={project.icon}></i>
+                  <div className="project-banner-image-container">
+                    <img src={project.image} alt={project.title} className="project-banner-img" />
+                    <div className="project-banner-overlay">
+                      <i className={project.icon}></i>
+                    </div>
                     <span className="project-tech-badge">{project.tech}</span>
                   </div>
                   <div className="project-content-body">
