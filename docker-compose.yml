@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: portfolio_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - portfolio_network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: portfolio_backend
+    ports:
+      - "3600:3600"
+    environment:
+      - PORT=3600
+      - NODE_ENV=production
+      - MONGO_URL=mongodb://mongodb:27017/portfolio
+      - JWT_SECRET=c6f4df3376ae75b9f71ab87ad5cf43e59048fe7d96ebbf952dfa095a044d47d4
+      - FRONTEND_URL=http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - portfolio_network
+    restart: unless-stopped
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:3600
+    container_name: portfolio_client
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_URL=http://localhost:3600
+    depends_on:
+      - backend
+    networks:
+      - portfolio_network
+    restart: unless-stopped
+
+networks:
+  portfolio_network:
+    driver: bridge
+
+volumes:
+  mongo_data:

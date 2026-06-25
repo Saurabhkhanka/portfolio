@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const AuthContext = createContext();
 
 // Configure axios defaults globally
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:5500";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:3600";
 axios.defaults.withCredentials = true;
 
 let csrfTokenInMemory = "";
