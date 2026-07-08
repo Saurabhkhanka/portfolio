@@ -17,6 +17,15 @@ const Projects = () => {
       tech: 'Next.js, Node.js & MongoDB'
     },
     {
+      title: 'AI-Powered MERN Quiz Platform',
+      description: 'A robust online testing portal featuring automated quiz generation via the Google Gemini AI API, secure JWT sessions with cookie authorization, Docker containerization, and a automated CI/CD pipeline.',
+      liveLink: '',
+      githubLink: 'https://github.com/Saurabhkhanka/quiz-app',
+      icon: 'ri-brain-line',
+      image: '/projects/quiz.png',
+      tech: 'React, Node.js, Gemini API & CI/CD'
+    },
+    {
       title: 'Weather Forecast Portal',
       description: 'A responsive weather forecast web app showing real-time atmospheric updates and predictions with dynamic visual states.',
       liveLink: 'https://weather-forecast-srsb.onrender.com',

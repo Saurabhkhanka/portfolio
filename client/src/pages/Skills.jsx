@@ -61,7 +61,8 @@ const Skills = () => {
         { name: 'VS Code', icon: 'ri-code-line', color: '#007ACC' },
         { name: 'Postman', icon: 'ri-send-plane-fill', color: '#FF6C37' },
         { name: 'NPM', icon: 'ri-npmjs-fill', color: '#CB3837' },
-        { name: 'Render', icon: 'ri-cloud-line', color: '#46E3B7' }
+        { name: 'Render', icon: 'ri-cloud-line', color: '#46E3B7' },
+        { name: 'GitHub Actions', icon: 'ri-rocket-2-line', color: '#2088FF' }
       ]
     },
     {
@@ -75,7 +76,8 @@ const Skills = () => {
         { name: 'JWT', icon: 'ri-shield-keyhole-line', color: '#D63AFF' },
         { name: 'Bcrypt', icon: 'ri-lock-password-line', color: '#FF3366' },
         { name: 'Role-Based Access Control', icon: 'ri-user-settings-line', color: '#00C8FF' },
-        { name: 'Nodemailer', icon: 'ri-mail-send-fill', color: '#007acc' }
+        { name: 'Nodemailer', icon: 'ri-mail-send-fill', color: '#007acc' },
+        { name: 'Google Gemini API', icon: 'ri-brain-line', color: '#1A73E8' }
       ]
     }
   ];

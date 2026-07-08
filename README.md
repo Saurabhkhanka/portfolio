@@ -10,9 +10,9 @@ This repository contains my personal portfolio website, featuring a React & Vite
 ## Technology Stack
 
 - **Frontend:** React, Next.js, React Native, Redux Toolkit, RTK Query, HTML5, CSS3, Tailwind CSS
-- **Backend:** Node.js, Express.js, JWT, Bcrypt, Role-Based Access Control (RBAC), Nodemailer
+- **Backend:** Node.js, Express.js, Google Gemini API, JWT, Bcrypt, Role-Based Access Control (RBAC), Nodemailer
 - **Database:** MongoDB (Mongoose), MySQL
-- **DevOps & Tools:** Docker, Docker Compose, Nginx, Git, GitHub, Render, Postman, NPM
+- **DevOps & Tools:** Docker, Docker Compose, GitHub Actions (CI/CD), Nginx, Git, GitHub, Render, Postman, NPM
 
 ## Getting Started (Docker setup)
 
