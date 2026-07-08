@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Layout from '../components/Layout/Layout'
 import { Link } from 'react-router-dom'
+import About from './About'
+import Skills from './Skills'
+import Projects from './Projects'
+import Contact from './Contact'
 
 const dockerIcon = (
   <svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor" style={{ display: 'block' }}>
@@ -32,7 +36,7 @@ const Home = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="hero-section text-center text-lg-start">
+      <section className="hero-section text-center text-lg-start" id="hero-section">
         <div className="container">
           <div className="row align-items-center g-5">
             {/* Left Column: Intro */}
@@ -42,7 +46,7 @@ const Home = () => {
               </h1>
               <p className="hero-subtitle">Full Stack Developer | React, Node.js, Next.js & React Native Specialist</p>
               <div className="hero-buttons mt-4 d-flex justify-content-center justify-content-lg-start flex-wrap gap-3">
-                <Link to="/projects" className="btn-hero-primary text-decoration-none">My Projects</Link>
+                <a href="#projects" className="btn-hero-primary text-decoration-none">My Projects</a>
                 <a 
                   href="/resume.pdf" 
                   className="btn-hero-outline text-decoration-none"
@@ -52,7 +56,7 @@ const Home = () => {
                 >
                   <i className="ri-download-line me-1"></i> Resume
                 </a>
-                <Link to="/contact" className="btn-hero-outline text-decoration-none">Contact Me</Link>
+                <a href="#contact" className="btn-hero-outline text-decoration-none">Contact Me</a>
               </div>
             </div>
 
@@ -119,7 +123,7 @@ const Home = () => {
           <div className="row g-4 justify-content-center">
             {/* About Me Card */}
             <div className="col-lg-3 col-md-6 col-sm-10">
-              <Link to="/about" className="nav-card-link">
+              <a href="#about" className="nav-card-link">
                 <div className="nav-card card-about">
                   <div className="nav-card-icon-wrapper">
                     <i className="ri-user-3-line"></i>
@@ -130,12 +134,12 @@ const Home = () => {
                     Explore Profile <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
 
             {/* Skills Card */}
             <div className="col-lg-3 col-md-6 col-sm-10">
-              <Link to="/skills" className="nav-card-link">
+              <a href="#skills" className="nav-card-link">
                 <div className="nav-card card-skills">
                   <div className="nav-card-icon-wrapper">
                     <i className="ri-braces-line"></i>
@@ -146,12 +150,12 @@ const Home = () => {
                     View Skills <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
 
             {/* Projects Card */}
             <div className="col-lg-3 col-md-6 col-sm-10">
-              <Link to="/projects" className="nav-card-link">
+              <a href="#projects" className="nav-card-link">
                 <div className="nav-card card-projects">
                   <div className="nav-card-icon-wrapper">
                     <i className="ri-folder-open-line"></i>
@@ -162,12 +166,12 @@ const Home = () => {
                     See My Work <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
 
             {/* Contact Card */}
             <div className="col-lg-3 col-md-6 col-sm-10">
-              <Link to="/contact" className="nav-card-link">
+              <a href="#contact" className="nav-card-link">
                 <div className="nav-card card-contact">
                   <div className="nav-card-icon-wrapper">
                     <i className="ri-mail-send-line"></i>
@@ -178,11 +182,16 @@ const Home = () => {
                     Let's Connect <i className="ri-arrow-right-line"></i>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </section>
+
+      <About />
+      <Skills />
+      <Projects />
+      <Contact />
     </Layout>
   )
 }

@@ -19,9 +19,10 @@ const Contact = () => {
       const res = await axios.post("/api/v1/auth/client", {email,name,message})
       if(res.data.success){
         toast.success(res.data.message)
-        setTimeout(() => {
-          navigate('/')
-        }, 1500)
+        setName("")
+        setEmail("")
+        setMessage("")
+        setSubmitting(false)
       }else{
         toast.error(res.data.message)
         setSubmitting(false)
@@ -33,8 +34,7 @@ const Contact = () => {
   }
 
   return (
-    <Layout>
-      <section className="contact-section py-5 min-vh-80 d-flex align-items-center">
+    <section className="contact-section py-5 min-vh-80 d-flex align-items-center" id="contact">
         {/* Background Glowing Blur Orbs */}
         <div className="orb-contact-1"></div>
         <div className="orb-contact-2"></div>
@@ -174,7 +174,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </Layout>
   )
 }
 

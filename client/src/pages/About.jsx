@@ -3,8 +3,7 @@ import Layout from '../components/Layout/Layout'
 
 const About = () => {
   return (
-    <Layout>
-      <section className="about-section">
+    <section className="about-section" id="about">
         <div className="container mt-4">
           
           {/* Main Card Wrapper */}
@@ -88,7 +87,6 @@ const About = () => {
 
         </div>
       </section>
-    </Layout>
   )
 }
 

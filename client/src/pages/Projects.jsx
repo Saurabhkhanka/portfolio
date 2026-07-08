@@ -55,8 +55,7 @@ const Projects = () => {
   ];
 
   return (
-    <Layout>
-      <section className="projects-section py-5">
+    <section className="projects-section py-5" id="projects">
         <div className="container mt-4">
           <div className="text-center mb-5">
             <h2 className="welcome-title">My Projects</h2>
@@ -99,7 +98,6 @@ const Projects = () => {
           </div>
         </div>
       </section>
-    </Layout>
   )
 }
 

@@ -81,8 +81,7 @@ const Skills = () => {
   ];
 
   return (
-    <Layout>
-      <section className="skills-section py-5">
+    <section className="skills-section py-5" id="skills">
         <div className="container mt-4">
           <div className="text-center mb-5">
             <h2 className="welcome-title">My Skills</h2>
@@ -178,7 +177,6 @@ const Skills = () => {
             </div>
           )}        </div>
       </section>
-    </Layout>
   )
 }
 
