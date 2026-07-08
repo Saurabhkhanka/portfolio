@@ -89,7 +89,7 @@ const Skills = () => {
             <h2 className="welcome-title">My Skills</h2>
             <div className="welcome-line"></div>
             <p className="text-muted lead mx-auto fs-5" style={{ maxWidth: '650px' }}>
-              A detailed breakdown of language expertise, frameworks, tools, database management, and architecture integration.
+              A breakdown of the programming languages, frameworks, databases, and development tools I use.
             </p>
           </div>
 

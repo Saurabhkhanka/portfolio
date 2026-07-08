@@ -29,7 +29,7 @@ const Footer = () => {
               DEV-STREET
             </Link>
             <p className="footer-text">
-              The intersection of creativity & code. Dedicated to building high-performance, modern, and engaging web and mobile applications.
+              Designing and coding modern, fast, and user-friendly web and mobile applications.
             </p>
           </div>
 

@@ -26,13 +26,13 @@ const About = () => {
                 <div className="welcome-line ms-0 mb-4" style={{ width: '50px' }}></div>
                 
                 <p className="about-paragraph">
-                  Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer passionate about crafting responsive, scalable, and secure web and mobile applications using modern technologies like <strong>React, Next.js, Node.js, Express, MongoDB, and MySQL</strong>.
+                  Hello! I'm <strong>Saurabh Singh Khanka</strong>, a Full Stack Developer. I love building fast, secure, and user-friendly web and mobile applications using modern tools like <strong>React, Next.js, Node.js, Express, MongoDB, and MySQL</strong>.
                 </p>
                 <p className="about-paragraph">
-                  I specialize in building modular client-side architectures with <strong>Redux Toolkit & RTK Query</strong>, as well as native mobile apps with <strong>React Native</strong>. On the backend, I design secure relational and document databases, writing optimized endpoints protected by <strong>JWT verification, Bcrypt encryption, Role-Based Access Control (RBAC), and Nodemailer notification integrations</strong>.
+                  I specialize in creating clean user interfaces using <strong>Redux Toolkit</strong>, as well as mobile apps using <strong>React Native</strong>. On the backend, I write secure APIs with user logins, role controls, and email notification services.
                 </p>
                 <p className="about-paragraph">
-                  I love solving real-world problems through clean, type-safe code using <strong>TypeScript</strong>, managing workflows via <strong>Git & GitHub</strong>, containerizing applications with <strong>Docker</strong>, automating builds with <strong>GitHub Actions (CI/CD)</strong>, and deploying projects directly to cloud environments like <strong>Render</strong>.
+                  I enjoy writing clean code with <strong>TypeScript</strong>, managing projects with <strong>Git & GitHub</strong>, containerizing applications with <strong>Docker</strong>, setting up automated <strong>GitHub Actions (CI/CD)</strong> pipelines, and deploying websites directly to <strong>Render</strong>.
                 </p>
                 <p className="about-paragraph mb-0">
                   When I'm not coding, you can find me reading tech blogs to keep up with industry trends, exploring open-source projects, or playing basketball.

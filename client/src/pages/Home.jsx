@@ -15,16 +15,16 @@ const dockerIcon = (
 const Home = () => {
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const heroSkills = [
-    { name: 'React.js', icon: 'ri-reactjs-fill', color: '#61DAFB', bg: 'rgba(97, 218, 251, 0.1)', desc: 'For building responsive and dynamic web interfaces.' },
-    { name: 'JavaScript (ES6+)', icon: 'ri-javascript-fill', color: '#F7DF1E', bg: 'rgba(247, 223, 30, 0.1)', desc: 'For programming powerful client-side logic and features.' },
-    { name: 'TypeScript', icon: 'ri-braces-line', color: '#3178C6', bg: 'rgba(49, 120, 198, 0.1)', desc: 'For adding scale and type safety to modern applications.' },
-    { name: 'Next.js', icon: 'ri-instance-line', color: '#ffffff', bg: 'rgba(255, 255, 255, 0.1)', desc: 'For lightning-fast server-rendered React applications.' },
-    { name: 'React Native', icon: 'ri-smartphone-line', color: '#0dcaf0', bg: 'rgba(13, 202, 240, 0.1)', desc: 'For building cross-platform native mobile applications.' },
-    { name: 'Node.js', icon: 'ri-nodejs-fill', color: '#339933', bg: 'rgba(51, 153, 51, 0.1)', desc: 'For high-performance server-side scripting and engines.' },
-    { name: 'MongoDB', icon: 'ri-database-2-fill', color: '#47A248', bg: 'rgba(71, 162, 72, 0.1)', desc: 'For scalable, flexible document-based database storage.' },
-    { name: 'MySQL', icon: 'ri-database-line', color: '#00758F', bg: 'rgba(0, 117, 143, 0.1)', desc: 'For modeling relational databases and managing structured data.' },
-    { name: 'Docker', icon: dockerIcon, color: '#2496ED', bg: 'rgba(36, 150, 237, 0.1)', desc: 'For containerizing applications and automating deployments.' },
-    { name: 'Tailwind CSS', icon: 'ri-windy-line', color: '#38BDF8', bg: 'rgba(56, 189, 248, 0.1)', desc: 'For rapid UI design using utility-first styling classes.' }
+    { name: 'React.js', icon: 'ri-reactjs-fill', color: '#61DAFB', bg: 'rgba(97, 218, 251, 0.1)', desc: 'For building responsive and fast user interfaces.' },
+    { name: 'JavaScript (ES6+)', icon: 'ri-javascript-fill', color: '#F7DF1E', bg: 'rgba(247, 223, 30, 0.1)', desc: 'For coding website logic and features.' },
+    { name: 'TypeScript', icon: 'ri-braces-line', color: '#3178C6', bg: 'rgba(49, 120, 198, 0.1)', desc: 'For adding scale and type checks to applications.' },
+    { name: 'Next.js', icon: 'ri-instance-line', color: '#ffffff', bg: 'rgba(255, 255, 255, 0.1)', desc: 'For building fast React applications.' },
+    { name: 'React Native', icon: 'ri-smartphone-line', color: '#0dcaf0', bg: 'rgba(13, 202, 240, 0.1)', desc: 'For building mobile applications for iOS and Android.' },
+    { name: 'Node.js', icon: 'ri-nodejs-fill', color: '#339933', bg: 'rgba(51, 153, 51, 0.1)', desc: 'For building fast backend server logic.' },
+    { name: 'MongoDB', icon: 'ri-database-2-fill', color: '#47A248', bg: 'rgba(71, 162, 72, 0.1)', desc: 'For storing data in flexible databases.' },
+    { name: 'MySQL', icon: 'ri-database-line', color: '#00758F', bg: 'rgba(0, 117, 143, 0.1)', desc: 'For organizing structured database data.' },
+    { name: 'Docker', icon: dockerIcon, color: '#2496ED', bg: 'rgba(36, 150, 237, 0.1)', desc: 'For running applications in containers and automating deployments.' },
+    { name: 'Tailwind CSS', icon: 'ri-windy-line', color: '#38BDF8', bg: 'rgba(56, 189, 248, 0.1)', desc: 'For styling websites quickly using ready-made classes.' }
   ];
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,7 +112,7 @@ const Home = () => {
           <h2 className="welcome-title">Welcome to My Portfolio</h2>
           <div className="welcome-line"></div>
           <p className="text-muted lead mx-auto fs-5" style={{ maxWidth: '650px' }}>
-            Explore my work, technical skill sets, and projects, or get in touch directly to collaborate.
+            Explore my work, skills, and projects, or contact me directly to work together.
           </p>
         </div>
       </section>
@@ -129,7 +129,7 @@ const Home = () => {
                     <i className="ri-user-3-line"></i>
                   </div>
                   <h4 className="nav-card-title">About Me</h4>
-                  <p className="nav-card-text">Know more about my educational background, experience, and interests.</p>
+                  <p className="nav-card-text">Learn about my education, experience, and interests.</p>
                   <div className="nav-card-action mt-auto">
                     Explore Profile <i className="ri-arrow-right-line"></i>
                   </div>
@@ -145,7 +145,7 @@ const Home = () => {
                     <i className="ri-braces-line"></i>
                   </div>
                   <h4 className="nav-card-title">My Skills</h4>
-                  <p className="nav-card-text">Explore the full range of technologies, languages, and tools I specialize in.</p>
+                  <p className="nav-card-text">See the technologies, languages, and tools I work with.</p>
                   <div className="nav-card-action mt-auto">
                     View Skills <i className="ri-arrow-right-line"></i>
                   </div>
@@ -161,7 +161,7 @@ const Home = () => {
                     <i className="ri-folder-open-line"></i>
                   </div>
                   <h4 className="nav-card-title">Projects</h4>
-                  <p className="nav-card-text">Browse through my portfolio of responsive web applications and live demos.</p>
+                  <p className="nav-card-text">Check out my web applications and live project links.</p>
                   <div className="nav-card-action mt-auto">
                     See My Work <i className="ri-arrow-right-line"></i>
                   </div>
@@ -177,7 +177,7 @@ const Home = () => {
                     <i className="ri-mail-send-line"></i>
                   </div>
                   <h4 className="nav-card-title">Contact Me</h4>
-                  <p className="nav-card-text">Get in touch to collaborate on projects, discuss opportunities, or connect.</p>
+                  <p className="nav-card-text">Contact me to collaborate, discuss opportunities, or say hello.</p>
                   <div className="nav-card-action mt-auto">
                     Let's Connect <i className="ri-arrow-right-line"></i>
                   </div>
