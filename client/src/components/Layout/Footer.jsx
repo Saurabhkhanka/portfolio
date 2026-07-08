@@ -1,7 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      navigate(`/#${targetId}`);
+    }
+  };
+
   return (
     <footer className="custom-footer mt-auto">
       <div className="container">
@@ -22,10 +37,10 @@ const Footer = () => {
           <div className="col-lg-4 col-md-6">
             <h5 className="footer-heading">Quick Links</h5>
             <ul className="footer-links-list">
-              <li><Link to="/" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Home</Link></li>
-              <li><Link to="/about" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> About</Link></li>
-              <li><Link to="/projects" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Projects</Link></li>
-              <li><Link to="/contact" className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Contact</Link></li>
+              <li><a href="#hero-section" onClick={(e) => handleNavClick(e, 'hero-section')} className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Home</a></li>
+              <li><a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> About</a></li>
+              <li><a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Projects</a></li>
+              <li><a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="footer-link-custom"><i className="ri-arrow-right-s-line"></i> Contact</a></li>
               <li><Link to="/admin" className="footer-link-custom text-warning"><i className="ri-arrow-right-s-line text-warning"></i> Admin Dashboard</Link></li>
             </ul>
           </div>
